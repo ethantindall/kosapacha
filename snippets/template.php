@@ -20,7 +20,7 @@
     </nav>
 
     <main>
-        <h1><? php echo $SESSION["h1"]; ?></h1>
+        <h1><?php echo $_SESSION["h1"]; ?></h1>
     </main>
     <footer>
         <?php require $_SERVER['DOCUMENT_ROOT'].'/kosapacha/snippets/footer.php'; ?>

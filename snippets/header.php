@@ -1,1 +1,1 @@
-<p>Kosapacha Group</p>
+<img src="images/klogo.jpg" alt="Kosapacha Logo">
