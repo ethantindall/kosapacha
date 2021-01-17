@@ -3,38 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" media="screen" href="/kosapacha/css/small.css">
-    <link rel="stylesheet" media="screen" href="/kosapacha/css/large.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/kosapacha/css/small.css">
 
-
-    <title><?php echo $_SESSION["title"] ?></title>
-
+    <title>Kosapacha Group</title>
 </head>
 <body>
+
     <header>
         <?php require $_SERVER['DOCUMENT_ROOT'].'/kosapacha/snippets/header.php'; ?>
     </header>
 
-    <div id="navbar"><b>KOSAPACHA GROUP</b></div>
-    <div class="content"> 
-    <main>
-        <h1><?php echo $_SESSION["h1"]; ?></h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit perspiciatis itaque dolore molestiae pariatur exercitationem dolor facilis, a cumque rem assumenda veritatis distinctio quas nisi delectus maiores possimus quis illum?</p>
-        
-        <h2><a href="index.php/?action=medical">Medical Products</a></h2>
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur aspernatur sit enim ratione in molestias repellat? Molestiae incidunt, dolor recusandae quas obcaecati iste excepturi eius nemo expedita nam quidem sint!</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum molestiae natus, voluptas ipsam, quas dolor beatae quod perspiciatis doloremque dicta cumque nostrum modi illum optio. Doloribus fuga exercitationem illum fugiat?</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum molestiae natus, voluptas ipsam, quas dolor beatae quod perspiciatis doloremque dicta cumque nostrum modi illum optio. Doloribus fuga exercitationem illum fugiat?</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum molestiae natus, voluptas ipsam, quas dolor beatae quod perspiciatis doloremque dicta cumque nostrum modi illum optio. Doloribus fuga exercitationem illum fugiat?</p>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum molestiae natus, voluptas ipsam, quas dolor beatae quod perspiciatis doloremque dicta cumque nostrum modi illum optio. Doloribus fuga exercitationem illum fugiat?</p>
+    <main>
+        <img src="/kosapacha/images/peru.jpg" alt="Photo of Peru by Willian Justen de Vasconcellos on Unsplash">
+        <div class="main-content">
+            <h1>KOSAPACHA GROUP</h1>
+            <hr>
+            <p>What is Kosapacha Group? Well, we're a Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus cupiditate beatae delectus vero necessitatibus aperiam aliquid, itaque, assumenda culpa dignissimos debitis provident rerum totam sint harum exercitationem expedita, obcaecati sed?</p>
+        
+            <a href="#"><div class="card card1">
+                <h2>SAMPLE PRODUCT</h2>
+            </div></a>
+
+            <a href="#"><div class="card card2">
+                <h2>SAMPLE PRODUCT</h2>
+            </div></a>
+
+            <a href="#"><div class="card card3">
+                <h2>SAMPLE PRODUCT</h2>
+            </div></a>
+
+        </div>
+
 
     </main>
+
 
     <footer>
         <?php require $_SERVER['DOCUMENT_ROOT'].'/kosapacha/snippets/footer.php'; ?>
     </footer>
-    </div>
-<script src="js/main.js"></script>
+
+
+
+
+
+
 </body>
 </html>
