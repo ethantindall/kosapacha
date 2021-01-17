@@ -20,6 +20,7 @@ switch ($action){
         break;
     default:
         include 'views/home.php';
+        echo "meow"
         break;
 }
 ?>
