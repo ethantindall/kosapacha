@@ -17,11 +17,11 @@ switch ($action){
     case 'medical':
         $_SESSION["title"] = "Kosapacha Group Medical Page";
         $_SESSION["h1"] = "Medical products";
-        include 'kosapacha/views/medical-products.php';
+        include 'views/medical-products.php';
         break;
     default:
         $_SESSION["title"] = "Kosapacha Group Home Page";
         $_SESSION["h1"] = "Kosapacha Group";
-        include 'kosapacha/views/home.php';
+        include '/views/home.php';
         break;
 }
