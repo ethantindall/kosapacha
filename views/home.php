@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/kosapacha/css/small.css">
+    <link rel="stylesheet" href="css/small.css">
+    <link rel="stylesheet" href="css/large.css">
 
-    <title>Kosapacha Group</title>
+    <title> <?php echo $_SESSION['title'] ?></title>
 </head>
 <body>
 
     <header>
-        <?php require $_SERVER['DOCUMENT_ROOT'].'/kosapacha/snippets/header.php'; ?>
+        <span class="material-icons" onclick="showhide()">menu</span>
+        <p>KOSA<b>PACHA</b></p>
+        <span class="material-icons">shopping_bag</span>
     </header>
+
+    <div id="sidebar" class="hide">
+            <ul>
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+
+            </ul>
+
+        </div>
+
 
 
     <main>
-        <img src="/kosapacha/images/peru.jpg" alt="Photo of Peru by Willian Justen de Vasconcellos on Unsplash">
+
+        <img src="images/peru.jpg" alt="Photo of Peru by Willian Justen de Vasconcellos on Unsplash">
         <div class="main-content">
             <h1>KOSAPACHA GROUP</h1>
             <hr>
@@ -41,13 +56,20 @@
 
 
     <footer>
-        <?php require $_SERVER['DOCUMENT_ROOT'].'/kosapacha/snippets/footer.php'; ?>
+        <hr>
+        <p>KOSA<b>PACHA</b></p>
+        <div class="foot-row-2">
+            <a class="foot-item" href="#">Legal</a>
+            <a class="foot-item" href="#">About Us</a>
+
+            <span class="foot-item">&copy; 2020</span>
+        </div>
     </footer>
 
 
 
 
-
+<script src="script.js"></script>
 
 </body>
 </html>

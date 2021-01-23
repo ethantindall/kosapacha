@@ -19,7 +19,11 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 12px 10px 5px 10px;
+    padding-top: 12px;
+    position: fixed;
+    width: 100%;
+    margin-bottom: 50px;
+    background-image: linear-gradient(to right, #191919 , black);
 }
 footer {
     text-align: center;
@@ -41,9 +45,14 @@ footer p {
 footer hr {
     margin-bottom: 25px;
 }
+
 header p, footer p {
     font-family: 'Overpass', sans-serif;
     font-weight: 100;
+}
+header p {
+    font-size: 1.2rem;
+
 }
 h1 {
     font-family: 'Overpass', sans-serif;
@@ -96,3 +105,23 @@ main img {
 
 }
 
+#sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    top: 70px;
+    background-image: linear-gradient(to right, #191919 , black);
+
+    background-color: #191919;
+
+}
+#sidebar ul li {
+    list-style: none;
+
+}
+#sidebar ul {
+    list-style-type: none;
+}
+.hide {
+    display: none;
+}

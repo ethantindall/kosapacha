@@ -1,7 +1,13 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+  $file = '/tmp/sample-app.log';
+  $message = file_get_contents('php://input');
+  file_put_contents($file, date('Y-m-d H:i:s') . " Received message: " . $message . "\n", FILE_APPEND);
+}
 
 // Create or access a Session
-//session_start();
+session_start();
 
 
 $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
@@ -11,15 +17,19 @@ $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 
 
 switch ($action){
-    case 'register-page':
-        include 'views/registration.php';
+    case 'products-overview':
+        $_SESSION['title'] = 'Kosapacha Product Types';
+        include 'views/products-overview.php';
         break;
     case 'medical':
-        include 'views/medical-products.php';
+        $_SESSION['title'] = 'Kosapacha Medical Products';
+
+        include 'views/product.php';
         break;
     default:
+    $_SESSION['title'] = 'Kosapacha Group Home';
+
         include 'views/home.php';
         break;
 }
-
 ?>
