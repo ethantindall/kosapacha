@@ -1,4 +1,4 @@
 function showhide() {
-    var element = document.getElementById("sidebar");
+    var element = document.getElementsByClassName("sidebar")[0];
     element.classList.toggle("hide");
 }

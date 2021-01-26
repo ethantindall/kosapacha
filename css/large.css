@@ -4,7 +4,36 @@ header p {
     padding: 0;
     margin: 0;
 }
-#sidebar {
+header {
+    padding: 20px 10px 60px 10px;
+}
+.sidebar {
+    position: fixed;
+    width: 100%;
+    height: 20px;
+    display: inline;
+}
+.sidebar ul {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0;
+    padding: 20px 0 0 0;
+}
+.sidebar ul li {
+    margin: 0;
+    padding: 0 5px 0 5px;
+    border-bottom: none;
+    font-size: 1rem;
+}
+.sidebar ul li:hover {
+    border-bottom: solid 1px white;
+    border-left: solid 1px white;
+}
+.material-icons {
     display: none;
 }
+header {
+justify-content: center;}
   }

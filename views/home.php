@@ -17,11 +17,13 @@
         <span class="material-icons">shopping_bag</span>
     </header>
 
-    <div id="sidebar" class="hide">
+    <div class="sidebar hide">
             <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Contact</li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Cart</a></li>
 
             </ul>
 
