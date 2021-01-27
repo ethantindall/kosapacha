@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="css/small.css">
-    <link rel="stylesheet" href="css/large.css">
+    <link rel="stylesheet" href="/kosapacha/css/small.css">
+    <link rel="stylesheet" href="/kosapacha/css/large.css">
 
     <title> <?php echo $_SESSION['title'] ?></title>
 </head>
@@ -36,22 +36,18 @@
 
         <img src="images/peru.jpg" alt="Photo of Peru by Willian Justen de Vasconcellos on Unsplash">
         <div class="main-content">
-            <h1>KOSAPACHA GROUP</h1>
+            <h1>KOSAPACHA GROUP LOGIN</h1>
             <hr>
-            <p>What is Kosapacha Group? Well, we're a Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus cupiditate beatae delectus vero necessitatibus aperiam aliquid, itaque, assumenda culpa dignissimos debitis provident rerum totam sint harum exercitationem expedita, obcaecati sed?</p>
-        
-            <a href="#"><div class="card card1">
-                <h2>SAMPLE PRODUCT</h2>
-            </div></a>
+            <form action="/kosapacha/accounts/" method="post">
+            <label>Email</label><br>
+            <input required type="email" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> ><br>
+            <label>Password</label><br>
+            <span>(Must be at least 8 characters and have 1 uppercase letter number and special character.)</span><br>
+            <input required type="password" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"><br>
+            <button type="submit">Sign In</button>
+            <input type="hidden" name="action" value="Login">
 
-            <a href="#"><div class="card card2">
-                <h2>SAMPLE PRODUCT</h2>
-            </div></a>
-
-            <a href="#"><div class="card card3">
-                <h2>SAMPLE PRODUCT</h2>
-            </div></a>
-
+        </form>
         </div>
 
 
