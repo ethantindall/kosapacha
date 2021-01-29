@@ -1,0 +1,21 @@
+CREATE TABLE products (
+	product_id NOT NULL INT, SERIAL;
+	product_name VARCHAR NOT NULL;
+	product_description VARCHAR NOT NULL;
+	product_inventory INT NOT NULL;
+	product_price FLOAT NOT NULL;	
+);
+
+CREATE TABLE employees (
+	employee_id NOT NULL INT SERIAL;
+	employee_fname VARCHAR NOT NULL;
+	employee_mname VARCHAR;
+	employee_lname VARCHAR NOT NULL;
+	employee_notes VARCHAR;
+	employee_max_hours INT;
+);
+
+CREATE TABLE weekly_hours (
+	
+
+);
