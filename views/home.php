@@ -18,23 +18,19 @@
     </header>
 
     <div class="sidebar hide">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Cart</a></li>
-                <li><a href="accounts/index.php/?action=login-page">Log In</a></li>
-
-            </ul>
-
-        </div>
+            <?php echo $_SESSION['navbar'] ?>
+    </div>
 
 
 
     <main>
 
-        <img src="images/peru.jpg" alt="Photo of Peru by Willian Justen de Vasconcellos on Unsplash">
+
+        <picture>
+            <source srcset="images/perularge.jpg" media="(min-width: 700px)"/>
+            <img id="banner-img" src="images/perusmall.jpg" alt="Photo of Peru by Willian Justen de Vasconcellos on Unsplash">
+        </picture>
+
         <div class="main-content">
             <h1>KOSAPACHA GROUP</h1>
             <hr>

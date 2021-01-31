@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/kosapacha/css/small.css">
-    <link rel="stylesheet" href="/kosapacha/css/large.css">
+    <link rel="stylesheet" href="/css/small.css">
+    <link rel="stylesheet" href="/css/large.css">
+    <link rel="stylesheet" href="/css/login.css">
 
     <title> <?php echo $_SESSION['title'] ?></title>
 </head>
@@ -18,23 +19,10 @@
     </header>
 
     <div class="sidebar hide">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Cart</a></li>
-                <li><a href="accounts/index.php/?action=login-page">Log In</a></li>
-
-            </ul>
-
-        </div>
-
-
+            <?php echo $_SESSION['navbar']; ?>
+    </div>
 
     <main>
-
-        <img src="images/peru.jpg" alt="Photo of Peru by Willian Justen de Vasconcellos on Unsplash">
         <div class="main-content">
             <h1>KOSAPACHA GROUP LOGIN</h1>
             <hr>

@@ -34,7 +34,7 @@ switch ($action){
         $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
         $passwordCheck = checkPassword($clientPassword);
         
-        $existingEmail = checkExistingEmail($clientEmail);
+        //$existingEmail = checkExistingEmail($clientEmail);
     
         // Run basic checks, return if errors
         if (empty($clientEmail) || empty($passwordCheck) || !$existingEmail) {
@@ -45,7 +45,7 @@ switch ($action){
           
         // A valid password exists, proceed with the login process
         // Query the client data based on the email address
-        $clientData = getClient($clientEmail);
+        //$clientData = getClient($clientEmail);
         // Compare the password just submitted against
         // the hashed password for the matching client
         $hashCheck = password_verify($clientPassword, $clientData['clientPassword']);
