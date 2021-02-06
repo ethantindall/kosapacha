@@ -1,4 +1,12 @@
 <?php
+
+require 'library/connection.php';
+
+session_start();
+
+//kosapachaConnect();
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
   $file = '/tmp/sample-app.log';
