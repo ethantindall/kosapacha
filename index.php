@@ -2,10 +2,6 @@
 
 require 'library/connection.php';
 
-session_start();
-
-//kosapachaConnect();
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -32,7 +28,7 @@ $_SESSION['navbar'] = '
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Products</a></li>
                 <li><a href="#">Cart</a></li>
-                <li><a href="/accounts/index.php/?action=login-page">Log In</a></li>
+                <li><a href="accounts/index.php/?action=login-page">Log In</a></li>
             </ul>';
 
 

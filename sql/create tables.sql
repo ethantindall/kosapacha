@@ -15,7 +15,9 @@ CREATE TABLE employees (
 	employee_mname VARCHAR(40),
 	employee_lname VARCHAR(40) NOT NULL,
 	employee_notes VARCHAR(255),
-	employee_max_hours INT,
+	employee_max_hours FLOAT,
+    employee_username VARCHAR(40) NOT NULL,
+    employee_password VARCHAR(255) NOT NULL,
 	PRIMARY KEY (employee_id)
 );
 
@@ -40,6 +42,5 @@ CREATE TABLE timesheet (
     sun_notes VARCHAR(255),
     
     FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
-    FOREIGN KEY (weekly_max_hours) REFERENCES employees(employee_max_hours),
     PRIMARY KEY (week_id)
 );

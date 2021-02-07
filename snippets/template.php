@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/small.css">
+    <link rel="stylesheet" href="css/large.css">
 
     <title> <?php echo $_SESSION['title'] ?></title>
 </head>

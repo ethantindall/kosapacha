@@ -1,8 +1,4 @@
-<?php 
-    require 'library/connection.php';
-    //kosapachaConnect();
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">

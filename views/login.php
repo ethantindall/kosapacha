@@ -24,18 +24,22 @@
 
     <main>
         <div class="main-content">
-            <h1>KOSAPACHA GROUP LOGIN</h1>
-            <hr>
-            <form action="/kosapacha/accounts/" method="post">
-            <label>Email</label><br>
-            <input required type="email" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> ><br>
-            <label>Password</label><br>
-            <span>(Must be at least 8 characters and have 1 uppercase letter number and special character.)</span><br>
-            <input required type="password" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"><br>
-            <button type="submit">Sign In</button>
-            <input type="hidden" name="action" value="Login">
+        <hr>
 
-        </form>
+            <h1>KOSAPACHA GROUP LOGIN</h1>
+            <?php if (isset($_SESSION['message'])) {echo $_SESSION['message'];} ?> 
+
+            <!--AWS: <form action="/accounts/" method="post"> -->
+            <!--Localhost: <form action="/kosapacha/accounts/" method="post"> -->
+
+            <form action="/accounts/" method="post">
+                <label>Username</label><br>
+                <input required type="text" name="username" <?php if(isset($username)){echo "value='$username'";}  ?> ><br>
+                <label>Password</label><br>
+                <input required type="password" name="password"><br>
+                <button type="submit">Sign In</button>
+                <input type="hidden" name="action" value="Login">
+            </form>
         </div>
 
 
