@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="<?php echo $_SESSION['lang']; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +13,12 @@
 <body>
 
     <header>
-        <span class="material-icons" onclick="showhide()">menu</span>
-        <p>KOSA<b>PACHA</b></p>
-        <span class="material-icons">shopping_bag</span>
+        <?php require '../snippets/header.php'; ?>
     </header>
 
     <div class="sidebar hide">
-            <?php echo $_SESSION['navbar']; ?>
+        <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/nav-es.php';}
+            else {require '../snippets/nav.php';} ?>
     </div>
 
     <main>
@@ -47,13 +46,8 @@
 
 
     <footer>
-        <hr>
-        <p>KOSA<b>PACHA</b></p>
-        <div class="foot-row-2">
-            <a class="foot-item" href="#">Legal</a>
-            <a class="foot-item" href="#">About Us</a>
-
-            <span class="foot-item">&copy; 2020</span>
+    <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/footer-es.php';}
+            else {require '../snippets/footer.php';} ?>
         </div>
     </footer>
 

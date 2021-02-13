@@ -12,7 +12,6 @@
 <body>
 
     <header>
-        <?php require $_SERVER['DOCUMENT_ROOT'].'/kosapacha/snippets/header.php'; ?>
     </header>
 
 
@@ -23,7 +22,8 @@
 
 
     <footer>
-        <?php require $_SERVER['DOCUMENT_ROOT'].'/kosapacha/snippets/footer.php'; ?>
+        <?php if ($_SESSION['lang'] == 'es') {require 'snippets/es/footer-es.php';}
+            else {require 'snippets/footer.php';} ?>
     </footer>
 
 </body>
