@@ -16,14 +16,16 @@ a {
     padding: 15px 10px 10px 10px;
 }
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     padding-top: 12px;
     position: fixed;
     width: 100%;
     margin-bottom: 50px;
     background-image: linear-gradient(to right, #191919 , black);
+}
+#header-row-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 footer {
     text-align: center;
@@ -127,4 +129,23 @@ main img {
 }
 .hide {
     display: none;
+}
+
+
+/*-----------SWITCH-----------*/
+#header-row-1  {
+    display: flex;
+    flex-direction: row;
+    margin-left: 66%;
+}
+#header-row-1 input[type=submit] {
+    display: inline;
+    background-color: gray;
+    border-radius: 5px;
+    border: solid 2px white;
+    height: 30px;
+    margin: 0;
+}
+#header-row-1 input[type=submit]:hover {
+    background-color: red;
 }

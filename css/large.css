@@ -7,8 +7,8 @@ header p {
 header {
     position: static;
     background-image: none;
-
 }
+
 .sidebar {
     position: static;
     display: inline;

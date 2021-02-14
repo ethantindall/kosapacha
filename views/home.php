@@ -17,13 +17,14 @@
 
     <div class="sidebar hide">
         <?php if ($_SESSION['lang'] == 'es') {require 'snippets/es/nav-es.php';}
-            else {require 'snippets/nav.php';} ?>
+            else {require 'snippets/nav.php';} 
+            ?>
     </div>
 
 
 
     <main>
-
+    <?php if (isset($_SESSION['message'])) {echo $_SESSION['message'];} ?> 
 
         <picture>
             <source srcset="images/perularge.jpg" media="(min-width: 700px)"/>
@@ -32,19 +33,20 @@
 
         <div class="main-content">
             <h1>KOSAPACHA GROUP</h1>
+
             <hr>
             <p>What is Kosapacha Group? Well, we're a Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus cupiditate beatae delectus vero necessitatibus aperiam aliquid, itaque, assumenda culpa dignissimos debitis provident rerum totam sint harum exercitationem expedita, obcaecati sed?</p>
         
-            <a href="#"><div class="card card1">
-                <h2>SAMPLE PRODUCT</h2>
+            <a href="index.php/?action=kp-usa"><div class="card card1">
+                <h2>Kosapacha Group USA</h2>
             </div></a>
 
-            <a href="#"><div class="card card2">
-                <h2>SAMPLE PRODUCT</h2>
+            <a href="index.php/?action=kp-sa"><div class="card card2">
+                <h2>Kosapacha Holdings - South America</h2>
             </div></a>
 
-            <a href="#"><div class="card card3">
-                <h2>SAMPLE PRODUCT</h2>
+            <a href="index.php/?action=kp-foundation"><div class="card card3">
+                <h2>Kosapacha Foundation</h2>
             </div></a>
 
         </div>
