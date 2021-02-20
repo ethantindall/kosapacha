@@ -27,5 +27,15 @@ function getUser($username){
     return $userData;
 }
 
+function createUser($username, $password) {
+    $db = kosapachaConnect();
+    $sql = "INSERT INTO employees (employee_fname, employee_lname, employee_max_hours, employee_username, employee_password)
+    VALUES ('Yo', 'Mama', 40, :username, :password)";
 
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+    $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+
+    $stmt->execute();
+}
 ?>

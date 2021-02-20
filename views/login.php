@@ -42,7 +42,7 @@
                 <input type="hidden" name="action" value="Login">
             </form>
         </div>
-
+    <a href="/kosapacha/accounts/index.php/?action=register">Register</a>
 
     </main>
 

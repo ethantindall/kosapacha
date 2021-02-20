@@ -62,6 +62,23 @@ switch ($action){
         $_SESSION['title'] = 'Kosapacha Employee Landing Page';
         include '../views/employee.php';
         break;
+
+    case 'register':
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
+
+        if ($password == $password2 && checkPassword($password)) {
+            echo 'success';
+            createUser($username, $password);
+        }
+        else {
+            $_SESSION['message'] = 'The passwords do not match or the password does not meet the criteria.';
+            include '../views/register.php';
+            exit;
+        }
+        include '../views/employee.php';
+        break;
     default:
         $_SESSION['title'] = 'Kosapacha Login Page';
         include '../views/login.php';
