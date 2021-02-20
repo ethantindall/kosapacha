@@ -44,3 +44,12 @@ CREATE TABLE timesheet (
     FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
     PRIMARY KEY (week_id)
 );
+
+create table credentials (
+	credential_id INT NOT NULL AUTO_INCREMENT,
+    credential_employee INT NOT NULL,
+    credential_password VARCHAR(255),
+    FOREIGN KEY (credential_employee) REFERENCES employees(employee_id),
+    PRIMARY KEY (credential_id)
+);
+

@@ -1,5 +1,5 @@
 <div id="header-row-1">
-    <form method="post" action="index.php">
+    <form method="post" action="/index.php">
         <input type="hidden" name="language" value="<?php echo $_SESSION['lang']; ?>">
             <input id="language" type="submit" value="Language">
             <input type="hidden" name="action" value="swap-language">

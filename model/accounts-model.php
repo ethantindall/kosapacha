@@ -17,8 +17,9 @@ function checkExistingUsername($username) {
 
 function getUser($username){
     $db = kosapachaConnect();
-    $sql = 'SELECT employee_username, employee_fname, employee_lname, employee_password
-             FROM employees WHERE employee_username = :username';
+    $sql = 'SELECT * FROM employees
+            LEFT JOIN credentials ON employees.employee_id = credentials.credential_employee
+            WHERE employee_username = :username;';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':username', $username, PDO::PARAM_STR);
     $stmt->execute();
@@ -27,15 +28,32 @@ function getUser($username){
     return $userData;
 }
 
-function createUser($username, $password) {
+function createUser($fname, $mname, $lname, $username) {
     $db = kosapachaConnect();
-    $sql = "INSERT INTO employees (employee_fname, employee_lname, employee_max_hours, employee_username, employee_password)
-    VALUES ('Yo', 'Mama', 40, :username, :password)";
+    $sql = "INSERT INTO employees (employee_fname, employee_mname, employee_lname, employee_max_hours, employee_username)
+                    VALUES (:fname, :mname, :lname, 40, :username)";
 
     $stmt = $db->prepare($sql);
+    $stmt->bindValue(':fname', $fname, PDO::PARAM_STR);
+    $stmt->bindValue(':mname', $mname, PDO::PARAM_STR);
+    $stmt->bindValue(':lname', $lname, PDO::PARAM_STR);
     $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+function storePassword($username, $password) {
+    $data = getUser($username);
+    $id = $data['employee_id'];
+
+    $db = kosapachaConnect();
+    $sql = "INSERT INTO credentials (credential_employee, credential_password)
+                    VALUES (:id, :password)";
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':id', $id, PDO::PARAM_STR);
     $stmt->bindValue(':password', $password, PDO::PARAM_STR);
 
     $stmt->execute();
+
 }
 ?>

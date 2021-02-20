@@ -34,6 +34,7 @@ switch ($action){
     case 'registration-page':
         $_SESSION['title'] = 'Kosapacha Registration Page';
         include '../views/register.php';
+        break;
     case 'Login':
         $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
@@ -52,32 +53,44 @@ switch ($action){
         $userData = getUser($username);
 
 
-        $hashCheck = password_verify($password, $userData['employee_password']);
+        $hashCheck = password_verify($password, $userData['credential_password']);
         if(!$hashCheck) {
            $_SESSION['message'] = '<p class="notice">Please check your password and try again.</p>';
            include '../views/login.php';
            exit;
         }
-
+        $_SESSION['loggedin'] = TRUE;
+        array_pop($userData);
+        $_SESSION['userData'] = $userData;
         $_SESSION['title'] = 'Kosapacha Employee Landing Page';
-        include '../views/employee.php';
+        include '../views/employee-pages/employee.php';
         break;
 
     case 'register':
+        $fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
+        $mname = filter_input(INPUT_POST, 'mname', FILTER_SANITIZE_STRING);
+        $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
         $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         $password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
+        $existingUsername = checkExistingUsername($username);
 
+        if ($existingUsername) {
+            $_SESSION['message'] = 'This username already exists.';
+            include '../views/register.php';
+            exit;
+        }
         if ($password == $password2 && checkPassword($password)) {
-            echo 'success';
-            createUser($username, $password);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            createUser($fname, $mname, $lname, $username);
+            storePassword($username, $hashedPassword);
         }
         else {
             $_SESSION['message'] = 'The passwords do not match or the password does not meet the criteria.';
             include '../views/register.php';
             exit;
         }
-        include '../views/employee.php';
+        include '../views/employee-pages/employee.php';
         break;
     default:
         $_SESSION['title'] = 'Kosapacha Login Page';

@@ -32,12 +32,19 @@
             <!--Localhost: <form action="/kosapacha/accounts/" method="post"> -->
 
             <form action="/kosapacha/accounts/" method="post">
-                <label>Username</label><br>
+                <label>First Name*</label><br>
+                <input required type="text" name="fname" <?php if(isset($fname)){echo "value='$fname'";}  ?> ><br>
+                <label>Middle Name</label><br>
+                <input type="text" name="mname" <?php if(isset($mname)){echo "value='$mname'";}  ?> ><br>
+                <label>Last Name*</label><br>
+                <input required type="text" name="lname" <?php if(isset($lname)){echo "value='$lname'";}  ?> ><br>
+
+                <label>Username*</label><br>
                 <input required type="text" name="username" <?php if(isset($username)){echo "value='$username'";}  ?> ><br>
-                <label>Password</label><br>
+                <label>Password*</label><br>
                 <input required type="password" name="password"><br>
                 
-                <label>Reenter Password</label><br>
+                <label>Reenter Password*</label><br>
                 <input required type="password" name="password2"><br>    
                 
                 <button type="submit">Register</button>
