@@ -54,6 +54,5 @@ function storePassword($username, $password) {
     $stmt->bindValue(':password', $password, PDO::PARAM_STR);
 
     $stmt->execute();
-
 }
 ?>

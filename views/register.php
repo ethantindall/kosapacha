@@ -31,7 +31,7 @@
             <!--AWS: <form action="/accounts/" method="post"> -->
             <!--Localhost: <form action="/kosapacha/accounts/" method="post"> -->
 
-            <form action="/kosapacha/accounts/" method="post">
+            <form action="/accounts/" method="post">
                 <label>First Name*</label><br>
                 <input required type="text" name="fname" <?php if(isset($fname)){echo "value='$fname'";}  ?> ><br>
                 <label>Middle Name</label><br>

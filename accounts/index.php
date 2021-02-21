@@ -90,8 +90,15 @@ switch ($action){
             include '../views/register.php';
             exit;
         }
-        include '../views/employee-pages/employee.php';
+        $_SESSION['message'] = 'Account created. Please sign in.';
+        include '../views/login.php';
         break;
+    case 'sign-out':
+        //destroy session
+        $_SESSION = array();
+        session_destroy();
+        header('Location: /');
+        exit;   
     default:
         $_SESSION['title'] = 'Kosapacha Login Page';
         include '../views/login.php';
