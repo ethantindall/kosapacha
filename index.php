@@ -1,7 +1,7 @@
 <?php
 
 require 'library/connection.php';
-
+require 'library/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -33,10 +33,6 @@ $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 
 if ($_SESSION['lang'] == 'es') {
      switch ($action){
-        case 'products-overview':
-            $_SESSION['title'] = 'Kosapacha Productos Types';
-            include 'views/products-overview.php';
-            break;
         case 'medical':
             $_SESSION['title'] = 'Kosapacha Medical Products';
             include 'views/product.php';
@@ -72,10 +68,6 @@ if ($_SESSION['lang'] == 'es') {
 } 
 else {
     switch ($action){
-        case 'products-overview':
-            $_SESSION['title'] = 'Kosapacha Product Types';
-            include 'views/products-overview.php';
-            break;
         case 'medical':
             $_SESSION['title'] = 'Kosapacha Medical Products';
             include 'views/product.php';

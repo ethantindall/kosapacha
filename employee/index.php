@@ -15,6 +15,17 @@ $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
 
  $_SESSION['message'] = '';
 
+/*---------LANGUAGE CONTROL------------*/
+
+if (isset($_COOKIE['preferred-language'])) {
+    $_SESSION['lang'] = $_COOKIE['preferred-language'];
+} else {
+    $_SESSION['lang'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+    setcookie('preferred-language', $_SESSION['lang'], time() + (86400 * 90));
+}
+
+
+/*----------SWITCH STATEMENT-------------*/
 
 switch ($action){
     case 'timesheet-page':
