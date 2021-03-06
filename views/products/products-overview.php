@@ -14,20 +14,24 @@
     <header>
         <?php require '../snippets/header.php'; ?>
     </header>
-<hr>
+    <div class="sidebar hide">
+        <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/nav-es.php';}
+            else {require '../snippets/nav.php';} 
+            ?>
+    </div>
 
     <main>
         <h1>Our Products</h1>
 
     <table>
         
-        <?php echo $productList; ?>
+        <?php echo $_SESSION['productTable']; ?>
     </table>
     </main>
 
 
     <footer>
-        <?php if ($_SESSION['lang'] == 'es') {require '///snippets/es/footer-es.php';}
+        <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/footer-es.php';}
             else {require '../snippets/footer.php';} ?>
     </footer>
 

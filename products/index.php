@@ -25,40 +25,47 @@ if (isset($_COOKIE['preferred-language'])) {
 }
 
 
+/*-------------GET PRODUCTS--------------*/
+
+if (!isset($productList)) {
+    $productList = getAllProducts();
+}
+if (!isset($_SESSION['productTable'])) {
+    $_SESSION['productTable'] = "";
+}
 /*----------SWITCH STATEMENT-------------*/
 
 if ($_SESSION['lang'] == 'es') {
      switch ($action){
-        case 'products':
+        case 'selectProduct':
             $product = filter_input(INPUT_GET, 'product', FILTER_SANITIZE_NUMBER_INT);
-            include '/kosapacha/views/products/products.php';
+            $selectedProduct = displaySelectedProduct($productList, $product);
+            include '../views/products/product.php';
             break;
         default:
             $_SESSION['title'] = 'Tipos de Productos de Kosapacha';
-            if (!isset($_SESSION['products'])) {
-                $_SESSION['products'] = populateProducts();
+            if (isset($_SESSION['productTable'])) {
+                $_SESSION['productTable'] = populateProducts($productList);            
             }
-            $productList = $_SESSION['products'];
-
-            include '/kosapacha/views/products/products-overview.php';
+            include '../views/products/products-overview.php';
             break;  
         }
     }
     else {
         switch ($action){
-            case 'products':
+            case 'selectProduct':
                 $product = filter_input(INPUT_GET, 'product', FILTER_SANITIZE_NUMBER_INT);
+                $selectedProduct = displaySelectedProduct($productList, $product);
+
                 include '../views/products/product.php';
                 break;
             default:
                 $_SESSION['title'] = 'Kosapacha Product Types';
-                if (!isset($_SESSION['products'])) {
-                    $_SESSION['products'] = populateProducts();
+                if (!isset($_SESSION['productTable'])) {
+                    $_SESSION['productTable'] = populateProducts($productList);            
                 }
-                $productList = $_SESSION['products'];
-
                 include '../views/products/products-overview.php';
-                break;
+                break;  
             }
         }
 ?>

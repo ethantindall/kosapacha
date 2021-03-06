@@ -11,19 +11,19 @@
 <body>
 
     <header>
-        <?php require $_SERVER['DOCUMENT_ROOT'].'/kosapacha/snippets/header.php'; ?>
+        <?php require '../snippets/header.php'; ?>
     </header>
 
 
     <main>
 
-        <?php echo $product; ?>
+        <?php echo print_r($selectedProduct); ?>
     </main>
 
 
-
     <footer>
-        <?php require $_SERVER['DOCUMENT_ROOT'].'/kosapacha/snippets/footer.php'; ?>
+        <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/footer-es.php';}
+            else {require '../snippets/footer.php';} ?>
     </footer>
 
 </body>
