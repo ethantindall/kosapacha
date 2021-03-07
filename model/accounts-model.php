@@ -30,8 +30,8 @@ function getUser($username){
 
 function createUser($fname, $mname, $lname, $username) {
     $db = kosapachaConnect();
-    $sql = "INSERT INTO employees (employee_fname, employee_mname, employee_lname, employee_max_hours, employee_username)
-                    VALUES (:fname, :mname, :lname, 40, :username)";
+    $sql = "INSERT INTO employees (employee_fname, employee_mname, employee_lname, employee_max_hours, employee_username, employee_access, employee_status)
+                    VALUES (:fname, :mname, :lname, 40, :username, 1, 'ACTIVE')";
 
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':fname', $fname, PDO::PARAM_STR);
@@ -55,4 +55,5 @@ function storePassword($username, $password) {
 
     $stmt->execute();
 }
+
 ?>

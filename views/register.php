@@ -16,11 +16,6 @@
         <?php require '../snippets/header.php'; ?>
     </header>
 
-    <div class="sidebar hide">
-        <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/nav-es.php';}
-            else {require '../snippets/nav.php';} ?>
-    </div>
-
     <main>
         <div class="main-content">
         <hr>

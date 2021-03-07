@@ -27,11 +27,11 @@ if (isset($_COOKIE['preferred-language'])) {
 
 /*-------------GET PRODUCTS--------------*/
 
-if (!isset($productList)) {
-    $productList = getAllProducts();
+if (!isset($_SESSION['productList'])) {
+    $_SESSION['productList'] = getAllProducts();
 }
 if (!isset($_SESSION['productTable'])) {
-    $_SESSION['productTable'] = "";
+    $_SESSION['productTable'] = populateProducts($_SESSION['productList']);
 }
 /*----------SWITCH STATEMENT-------------*/
 
@@ -39,13 +39,13 @@ if ($_SESSION['lang'] == 'es') {
      switch ($action){
         case 'selectProduct':
             $product = filter_input(INPUT_GET, 'product', FILTER_SANITIZE_NUMBER_INT);
-            $selectedProduct = displaySelectedProduct($productList, $product);
+            $selectedProduct = displaySelectedProduct($_SESSION['productList'], $product);
             include '../views/products/product.php';
             break;
         default:
             $_SESSION['title'] = 'Tipos de Productos de Kosapacha';
-            if (isset($_SESSION['productTable'])) {
-                $_SESSION['productTable'] = populateProducts($productList);            
+            if (!isset($_SESSION['productTable']) || $_SESSION['productTable'] == '') {
+                $_SESSION['productTable'] = populateProducts($_SESSION['productList']);            
             }
             include '../views/products/products-overview.php';
             break;  
@@ -55,14 +55,14 @@ if ($_SESSION['lang'] == 'es') {
         switch ($action){
             case 'selectProduct':
                 $product = filter_input(INPUT_GET, 'product', FILTER_SANITIZE_NUMBER_INT);
-                $selectedProduct = displaySelectedProduct($productList, $product);
+                $selectedProduct = displaySelectedProduct($_SESSION['productList'], $product);
 
                 include '../views/products/product.php';
                 break;
             default:
                 $_SESSION['title'] = 'Kosapacha Product Types';
-                if (!isset($_SESSION['productTable'])) {
-                    $_SESSION['productTable'] = populateProducts($productList);            
+                if (!isset($_SESSION['productTable']) || $_SESSION['productTable'] == '') {
+                    $_SESSION['productTable'] = populateProducts($_SESSION['productList']);            
                 }
                 include '../views/products/products-overview.php';
                 break;  

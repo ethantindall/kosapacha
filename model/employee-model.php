@@ -51,5 +51,72 @@ function updatePassword($userId, $password) {
 
     $stmt->execute();
 }
-?>
+
+
+
+function adminGetUsers() {
+    $allUsers = array();
+    $db = kosapachaConnect();
+    $sql = 'SELECT * FROM employees LEFT JOIN credentials
+    ON employees.employee_id = credentials.credential_employee';   
+    foreach ($db->query($sql) as $row) {
+        $allUsers[] = $row;
+    }
+    return $allUsers;
+}
+
+function adminGetOneUser($userId) {
+    $users = array();
+    $db = kosapachaConnect();
+    $sql = 'SELECT * FROM employees LEFT JOIN credentials
+    ON employees.employee_id = credentials.credential_employee
+    WHERE employee_id = ' .$userId;  
+    foreach ($db->query($sql) as $row) {
+        $users[] = $row;
+    }
+    return $users;
+}
+
+function usersTable(){
+    $table = "";
+    $allUsers = adminGetUsers();
+    if(empty($allUsers)){
+        return 'No Employees Found';
+    } else {
+        foreach ($allUsers as $user) {
+            $table .= '<tr>
+                          <td>'. $user['employee_fname'] . ' ' . $user['employee_lname'].'</td>  
+                          <td>'. $user['employee_access'] .'</td>  
+                          <td>'. $user['employee_status'] .'</td>  
+                          <td><a href="/employee/index.php/?action=editUserPage&user='. $user['employee_id'] .'">Edit</a></td>
+                       </tr>';
+        }
+    }
+    return $table;
+}
+function updateUser($userId, $fname, $mname, $lname, $username, $status, $access, $notes) {
+    $db = kosapachaConnect();
+    $sql = 'UPDATE employees SET
+                employee_fname = :fname,
+                employee_mname = :mname,
+                employee_lname = :lname,
+                employee_username = :username,
+                employee_status = :estatus,
+                employee_access = :access,
+                employee_notes = :notes
+            WHERE employee_id = :id';
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':id', $userId, PDO::PARAM_STR);
+    $stmt->bindValue(':fname', $fname, PDO::PARAM_STR);
+    $stmt->bindValue(':mname', $mname, PDO::PARAM_STR);
+    $stmt->bindValue(':lname', $lname, PDO::PARAM_STR);
+    $stmt->bindValue(':username', $username, PDO::PARAM_STR);
+    $stmt->bindValue(':estatus', $status, PDO::PARAM_STR);
+    $stmt->bindValue(':access', $access, PDO::PARAM_STR);
+    $stmt->bindValue(':notes', $notes, PDO::PARAM_STR);
+
+    $stmt->execute();
+}
+
 ?>

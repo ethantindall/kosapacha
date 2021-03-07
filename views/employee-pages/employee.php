@@ -33,6 +33,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === FALSE) {
             <li>Employee ID: <?php echo $_SESSION['userData']['employee_id']; ?></li>
             <li>Max Weekly Hours: <?php echo $_SESSION['userData']['employee_max_hours'] ?></li>
             <li>Current Weekly Hours: 0</li> 
+            <li>Employee Access Level <?php echo $_SESSION['userData']['employee_access'] ?></li>
         </ul>
 
 
@@ -47,10 +48,14 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === FALSE) {
                 <input type="hidden" name="action" value="update-password">
             </form>
 
-
-        <a href="/employee/index.php/?action=timesheet-page">Timesheet</a><br>
-        <a href="/accounts/index.php/?action=sign-out">Sign Out</a>
-
+        <ul>
+            <?php if($_SESSION['userData']['employee_access'] >= 3) {
+                echo '<a href="/employee/index.php/?action=admin">Administration</a><br>';
+                }
+            ?>
+            <a href="/employee/index.php/?action=timesheet-page">Timesheet</a><br>
+            <a href="/accounts/index.php/?action=sign-out">Sign Out</a>
+        </ul>
     </main>
 
 

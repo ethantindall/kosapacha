@@ -10,22 +10,29 @@
     <title> <?php echo $_SESSION['title'] ?></title>
 </head>
 <body>
-
     <header>
-    <span class="material-icons" onclick="showhide()">menu</span>
-        <p>KOSA<b>PACHA</b></p>
-        <span class="material-icons">shopping_bag</span>    </header>
-
+        <?php require '../snippets/header.php'; ?>
+    </header>
 
     <main>
-        <h1>You are Logged In</h1>
+    <?php if (isset($_SESSION['message'])) {echo '<p>' .$_SESSION['message'] . '</p>';} ?> 
 
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Access Level</th>    
+            <th>Status</th>
+            <th></th>
+        </tr>
+        <?php echo $_SESSION['employeeList']; ?>
+    </table>
     </main>
 
     <footer>
-        <?php if ($_SESSION['lang'] == 'es') {require 'snippets/es/footer-es.php';}
-            else {require 'snippets/footer.php';} ?>
+        <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/footer-es.php';}
+            else {require '../snippets/footer.php';} ?>
     </footer>
-
 </body>
+
+
 </html>

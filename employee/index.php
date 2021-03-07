@@ -4,6 +4,7 @@ session_start();
 require_once '../library/functions.php';
 require_once '../library/connection.php';
 require_once '../model/employee-model.php';
+require_once '../model/accounts-model.php';
 
 
 
@@ -107,6 +108,50 @@ switch ($action){
         $_SESSION['message'] = 'Password updated.';
         include '../views/employee-pages/employee.php';
         break;   
+    case 'admin':
+        $_SESSION['title'] = 'Kosapacha Admin Page';
+        $_SESSION['employeeList'] = usersTable();
+        include '../views/employee-pages/admin.php';
+        break; 
+    case 'editUserPage':
+        $userId = filter_input(INPUT_GET, 'user', FILTER_SANITIZE_NUMBER_INT);
+        $employeeDetails = adminGetOneUser($userId)[0];
+        include '../views/employee-pages/editUser.php';
+        break;        
+    case 'updateUser':
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $oldUser = filter_input(INPUT_POST, 'oldUser', FILTER_SANITIZE_STRING);
+        $fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
+        $mname = filter_input(INPUT_POST, 'mname', FILTER_SANITIZE_STRING);
+        $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $access = filter_input(INPUT_POST, 'access', FILTER_SANITIZE_NUMBER_INT);
+        $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING);
+        $notes = filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_STRING);
+
+        //if the username is the same as another, not including the previous one
+        if ($username != $oldUser) {
+            $existingUsername = checkExistingUsername($username);
+        }
+        if ($existingUsername) {
+            $_SESSION['message'] = 'This username already exists.';
+            header('Location: /employee/index.php/?action=editUserPage&user=' . $id);
+            exit;
+        }
+
+        //update user info
+        updateUser($id, $fname, $mname, $lname, $username, $status, $access, $notes);
+
+        //if password is not null, and passes test
+        if ($password != '' && checkPassword($password)) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            updatePassword($id, $hashedPassword);
+        }
+
+        $_SESSION['message'] = 'Account updated.';
+        header('Location: /employee/index.php/?action=admin');
+        break;
     default:
         include '../views/employee-pages/employee.php';
         break;

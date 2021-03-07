@@ -18,17 +18,13 @@
         <?php require '../snippets/header.php'; ?>
     </header>
 
-    <div class="sidebar hide">
-        <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/nav-es.php';}
-            else {require '../snippets/nav.php';} ?>
-    </div>
 
     <main>
         <div class="main-content">
         <hr>
 
             <h1>KOSAPACHA GROUP LOGIN</h1>
-            <?php if (isset($_SESSION['message'])) {echo $_SESSION['message'];} ?> 
+            <?php if (isset($_SESSION['message'])) {echo '<p>' .$_SESSION['message'] . '</p>';} ?> 
 
             <!--AWS: <form action="/accounts/" method="post"> -->
             <!--Localhost: <form action="/kosapacha/accounts/" method="post"> -->
