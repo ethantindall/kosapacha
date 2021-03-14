@@ -30,11 +30,47 @@ if (isset($_COOKIE['preferred-language'])) {
 
 switch ($action){
     case 'timesheet-page':
+        $_SESSION['title'] ="Kosapacha Timesheet";
+        $weekOf = filter_input(INPUT_GET, 'weekOf', FILTER_SANITIZE_STRING);
+        $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+        $dailyhours = 0;
+
+        $emp = getUserWOCreds($id);
+        $_SESSION['selectedUserId'] = $emp['employee_id'];
+        $_SESSION['selectedUserFname'] = $emp['employee_fname'];
+        $_SESSION['selectedUserLname'] = $emp['employee_lname'];
+
         /*TO DO: Create a list of dates and sent it to the dropdown, then use the default one to find 
         if there's an existing row*/
-        $week ='2021-02-20';
+        $timesheets = checkExistingTimesheet($_SESSION['selectedUserId']);
 
-        $_SESSION['title'] ="Kosapacha Timesheet";
+        $dropdownOptions= "";
+
+        if (count($timesheets) > 0) {
+            //sort the timesheets by date
+            usort($timesheets, function($a, $b) {
+                return strtotime($a['timesheet_week']) - strtotime($b['timesheet_week']);
+            });        
+            //select first one by default
+            $dailyhours = $timesheets[0];
+
+
+            foreach ($timesheets as $s) {
+                $add = "";
+                if ($s['timesheet_week'] == $weekOf) {
+                    $dailyhours = $s;
+                    //if selected day, set html to selected
+                    $add = '<option selected value="' . $s['timesheet_week'] .'">' . $s['timesheet_week'] . '</option>';
+
+                } else {
+                    $add = '<option value="' . $s['timesheet_week'] .'">' . $s['timesheet_week'] . '</option>';
+                }
+                $dropdownOptions .= $add;
+            }
+        }
+        else {
+            $dropdownOptions .= '<option selected disabled value="">No Timesheets</option>';
+        }
 
         if ($_SESSION['lang'] == 'es') {
             $tableHead = '<th>Lunes</th>
@@ -54,8 +90,7 @@ switch ($action){
                           <th>Saturday</th>
                           <th>Sunday</th>';
         }
-
-        $dailyhours = checkExistingTimesheet($_SESSION['userData']['employee_id'], $week);
+        //if no existing timesheet, set everything to 0
         if($dailyhours == 0) {
             $monHours   = 0;
             $tuesHours  = 0;
@@ -76,6 +111,12 @@ switch ($action){
 
         include '../views/employee-pages/timesheet.php';
         break;
+    case 'new-timesheet':
+        $date = filter_input(INPUT_POST, 'calendarPicker', FILTER_SANITIZE_STRING);
+
+        createNewTimesheet($date, $_SESSION['selectedUserId']);
+        header('Location: /kosapacha/employee/index.php/?action=admin');
+        break;
     case 'save-time':
         $weekOf = filter_input(INPUT_POST, 'week-of', FILTER_SANITIZE_STRING);
         $mon = filter_input(INPUT_POST, 'mon', FILTER_SANITIZE_NUMBER_FLOAT);
@@ -91,25 +132,11 @@ switch ($action){
 
         $_SESSION['message'] = 'Timesheet saved.';
         include '../views/employee-pages/employee.php';
-        break;   
-    case 'update-password':
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-        $password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
-
-        if ($password == $password2 && checkPassword($password)) {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            updatePassword($_SESSION['userData']['employee_id'], $hashedPassword);
-        }
-        else {
-            $_SESSION['message'] = 'The passwords do not match or the password does not meet the criteria.';
-            include '../views/employee-pages/employee.php';
-            exit;
-        }
-        $_SESSION['message'] = 'Password updated.';
-        include '../views/employee-pages/employee.php';
-        break;   
+        break;     
     case 'admin':
         $_SESSION['title'] = 'Kosapacha Admin Page';
+        $message = filter_input(INPUT_GET, 'message', FILTER_SANITIZE_STRING);
+        $_SESSION['message'] = $message;
         $_SESSION['employeeList'] = usersTable();
         include '../views/employee-pages/admin.php';
         break; 
@@ -129,16 +156,20 @@ switch ($action){
         $access = filter_input(INPUT_POST, 'access', FILTER_SANITIZE_NUMBER_INT);
         $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_STRING);
         $notes = filter_input(INPUT_POST, 'notes', FILTER_SANITIZE_STRING);
+        
+        //autofill details again
+        $employeeDetails = adminGetOneUser($id)[0];
 
         //if the username is the same as another, not including the previous one
         if ($username != $oldUser) {
             $existingUsername = checkExistingUsername($username);
+            if ($existingUsername == 1) {
+                $_SESSION['message'] = 'This username already exists.';
+                include '../views/employee-pages/editUser.php';
+                exit;
+            }
         }
-        if ($existingUsername) {
-            $_SESSION['message'] = 'This username already exists.';
-            header('Location: /employee/index.php/?action=editUserPage&user=' . $id);
-            exit;
-        }
+
 
         //update user info
         updateUser($id, $fname, $mname, $lname, $username, $status, $access, $notes);
@@ -147,10 +178,66 @@ switch ($action){
         if ($password != '' && checkPassword($password)) {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             updatePassword($id, $hashedPassword);
+            header('Location: /kosapacha/employee/index.php/?action=admin&message=Update%20Successful');
+            exit;
+        }
+        else if ($password == "") {
+            header('Location: /kosapacha/employee/index.php/?action=admin&message=Update%20Successful');
+            exit;     
+        }
+        else {
+            $_SESSION['message'] = 'Invalid password.';
+            include '../views/employee-pages/editUser.php';
+            exit; 
         }
 
-        $_SESSION['message'] = 'Account updated.';
-        header('Location: /employee/index.php/?action=admin');
+ case 'update-password':
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
+
+        if ($password == $password2 && checkPassword($password)) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            updatePassword($_SESSION['userData']['employee_id'], $hashedPassword);
+        }
+        else {
+            $_SESSION['message'] = 'The passwords do not match or the password does not meet the criteria.';
+            include '../views/employee-pages/employee.php';
+            exit;
+        }
+        $_SESSION['message'] = 'Password updated.';
+        include '../views/employee-pages/employee.php';
+        break;   
+
+    case 'registration-page':
+        $_SESSION['title'] = 'Kosapacha Registration Page';
+        include '../views/employee-pages/register.php';
+        break;
+    case 'register':
+        $fname = filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_STRING);
+        $mname = filter_input(INPUT_POST, 'mname', FILTER_SANITIZE_STRING);
+        $lname = filter_input(INPUT_POST, 'lname', FILTER_SANITIZE_STRING);
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
+        $existingUsername = checkExistingUsername($username);
+
+        if ($existingUsername) {
+            $_SESSION['message'] = 'This username already exists.';
+            include '../views/employee-pages/register.php';
+            exit;
+        }
+        if ($password == $password2 && checkPassword($password)) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            createUser($fname, $mname, $lname, $username);
+            storePassword($username, $hashedPassword);
+        }
+        else {
+            $_SESSION['message'] = 'The password does not meet the criteria.';
+            include '../views/employee-pages/register.php';
+            exit;
+        }
+        $_SESSION['message'] = 'Account created.';
+        header('Location: /kosapacha/employee/index.php/?action=admin&message=Account%20Added');
         break;
     default:
         include '../views/employee-pages/employee.php';

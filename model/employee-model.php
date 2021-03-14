@@ -16,28 +16,33 @@ function saveTime($id, $date, $mon, $tues, $wed, $thurs, $fri, $sat, $sun) {
     $stmt->bindValue(':sat', $sat);
     $stmt->bindValue(':sun', $sun);
     $stmt->execute();
-
-    
 }
 
-function checkExistingTimesheet($userId, $weekOf) {
+function checkExistingTimesheet($userId) {
+    $sheets = array();
     $db = kosapachaConnect();
-    $sql = 'SELECT * FROM timesheets
-            WHERE timesheet_employee = :id AND timesheet_week = :week';
-   
-    $stmt = $db->prepare($sql);
-    $stmt->bindValue(':id', $userId, PDO::PARAM_STR);
-    $stmt->bindValue(':week', $weekOf, PDO::PARAM_STR);
-    $stmt->execute();
-    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-    $stmt->closeCursor();
-    if(empty($userData)){
-        return 0;
-    } else {
-        return $userData;
+    $sql = 'SELECT * FROM timesheets WHERE timesheet_employee = ' . $userId;
+
+    foreach ($db->query($sql) as $row) {
+        $sheets[] = $row;
     }
-    
+    return $sheets;
 }
+
+function createNewTimesheet($date, $id) {
+    $db = kosapachaConnect();
+    $sql = 'INSERT INTO timesheets
+    (timesheet_employee, timesheet_week, mon_time, tues_time, wed_time, thurs_time, fri_time, sat_time, sun_time)
+    VALUES 
+    (:uid, :date, 0, 0, 0, 0,0,0,0);';
+
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':uid', $id, PDO::PARAM_INT);
+    $stmt->bindValue(':date', $date, PDO::PARAM_STR);
+    $stmt->execute();
+}
+
+
 function updatePassword($userId, $password) {
 
     $db = kosapachaConnect();
@@ -77,6 +82,16 @@ function adminGetOneUser($userId) {
     return $users;
 }
 
+function getUserWOCreds($userId) {
+    $users = array();
+    $db = kosapachaConnect();
+    $sql = 'SELECT * FROM employees WHERE employee_id = ' .$userId;  
+    foreach ($db->query($sql) as $row) {
+        $users[] = $row;
+    }
+    return $users[0];
+}
+
 function usersTable(){
     $table = "";
     $allUsers = adminGetUsers();
@@ -88,8 +103,13 @@ function usersTable(){
                           <td>'. $user['employee_fname'] . ' ' . $user['employee_lname'].'</td>  
                           <td>'. $user['employee_access'] .'</td>  
                           <td>'. $user['employee_status'] .'</td>  
-                          <td><a href="/employee/index.php/?action=editUserPage&user='. $user['employee_id'] .'">Edit</a></td>
-                       </tr>';
+                          <td><a href="/kosapacha/employee/index.php/?action=editUserPage&user='. $user['employee_id'] .'">Edit</a></td>
+                          <td><form action="/kosapacha/employee/" method="post">
+                                <button type="submit">Timesheet</button>
+                                <input type="hidden" name="id" value="'. $user['employee_id'] .'">
+                                <input type="hidden" name="action" value="timesheet-page">
+                              </form>
+                          </tr>';
         }
     }
     return $table;

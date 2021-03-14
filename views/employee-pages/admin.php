@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/small.css">
     <link rel="stylesheet" href="/css/large.css">
 
-    <title> <?php echo $_SESSION['title'] ?></title>
+    <title> <?php echo $_SESSION['title']; ?></title>
 </head>
 <body>
     <header>
@@ -16,6 +16,7 @@
 
     <main>
     <?php if (isset($_SESSION['message'])) {echo '<p>' .$_SESSION['message'] . '</p>';} ?> 
+    <a href="/kosapacha/employee/index.php/?action=registration-page">Register New User</a>
 
     <table>
         <tr>

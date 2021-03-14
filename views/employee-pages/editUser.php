@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/small.css">
     <link rel="stylesheet" href="/css/large.css">
 
-    <title> <?php echo $_SESSION['title'] ?></title>
+    <title> <?php echo $_SESSION['title']; ?></title>
 </head>
 <body>
     <header>
@@ -19,7 +19,7 @@
         <?php if (isset($_SESSION['message'])) {echo '<p>' .$_SESSION['message'] . '</p>';} ?> 
 
 
-        <form action="/employee/" method="post">
+        <form action="/kosapacha/employee/" method="post">
                 <input type="hidden" name="oldUser" value="<?php if(isset($employeeDetails['employee_username'])){echo $employeeDetails['employee_username'];} ?>" >
                 <input type="hidden" name="id" value="<?php if(isset($employeeDetails['employee_id'])){echo $employeeDetails['employee_id'];} ?>" >
 

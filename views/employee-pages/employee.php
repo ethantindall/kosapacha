@@ -37,7 +37,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === FALSE) {
         </ul>
 
 
-        <form action="/employee/" method="post">
+        <form action="/kosapacha/employee/" method="post">
 
                 <label>Password</label><br>
                 <input required type="password" name="password"><br>
@@ -50,11 +50,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === FALSE) {
 
         <ul>
             <?php if($_SESSION['userData']['employee_access'] >= 3) {
-                echo '<a href="/employee/index.php/?action=admin">Administration</a><br>';
+                echo '<a href="/kosapacha/employee/index.php/?action=admin">Administration</a><br>';
                 }
             ?>
-            <a href="/employee/index.php/?action=timesheet-page">Timesheet</a><br>
-            <a href="/accounts/index.php/?action=sign-out">Sign Out</a>
+            <a href="/kosapacha/employee/index.php/?action=timesheet-page">Timesheet</a><br>
+            <a href="/kosapacha/accounts/index.php/?action=sign-out">Sign Out</a>
         </ul>
     </main>
 

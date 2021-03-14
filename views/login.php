@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/large.css">
     <link rel="stylesheet" href="/css/login.css">
 
-    <title> <?php echo $_SESSION['title'] ?></title>
+    <title> <?php echo $_SESSION['title']; ?></title>
 </head>
 <body>
 
@@ -29,7 +29,7 @@
             <!--AWS: <form action="/accounts/" method="post"> -->
             <!--Localhost: <form action="/kosapacha/accounts/" method="post"> -->
 
-            <form action="/accounts/" method="post">
+            <form action="/kosapacha/accounts/" method="post">
                 <label>Username</label><br>
                 <input required type="text" name="username" <?php if(isset($username)){echo "value='$username'";}  ?> ><br>
                 <label>Password</label><br>
@@ -38,7 +38,6 @@
                 <input type="hidden" name="action" value="Login">
             </form>
         </div>
-    <a href="/accounts/index.php/?action=registration-page">Register</a>
 
     </main>
 
