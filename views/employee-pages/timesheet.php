@@ -1,46 +1,83 @@
 <?php
 //redirect if not logged in
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === FALSE) {
-    header('Location: /');
+if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
+    header('Location: /kosapacha/');
 }
 ?><!DOCTYPE html>
-<html lang="en-US">
+<html lang="<?php echo $_SESSION['lang']; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/small.css">
-    <link rel="stylesheet" href="/css/large.css">
-
+    <link rel="stylesheet" href="/kosapacha/css/styles.css">
+    <link rel="stylesheet" href="/kosapacha/css/small.css">
+    <script src="/kosapacha/script.js"></script>
     <title> <?php echo $_SESSION['title'] ?></title>
+    <style>
+        main {
+            padding: 70px 20px 20px 20px;
+            width: 90%;
+        }
+        .return {
+            padding: 10px;
+            margin: 10px 10px 10px 0;
+            border: 3px solid white;
+            border-radius: 3px;
+            background-color: #191919;
+            color: white;
+            font-family: 'Overpass', sans-serif;
+            font-size: 1rem;
+        }
+        article {
+            border: solid 3px white;
+            padding: 10px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        .return:hover {
+            background-color: white;
+            color: #191919;
+        }
+        h3 {
+            padding-top: 30px;
+            font-size: 1.5rem;
+        }
+
+    </style>
 </head>
 <body>
 
     <header>
-    <span class="material-icons" onclick="showhide()">menu</span>
-        <p>KOSA<b>PACHA</b></p>
-        <span class="material-icons">shopping_bag</span>    </header>
 
-
+        <?php require '../snippets/header.php'; ?>
+ 
+    </header>
     <main>
         <h1>Kosapacha Timesheet Page</h1>
         <?php if (isset($_SESSION['message'])) {echo '<p>' .$_SESSION['message'] . '</p>';} ?> 
+        <a class="return" href="/kosapacha/employee/index.php?action=employee">Return to Employee Portal</a>
 
-        <?php echo 'User Id: ' . $_SESSION['selectedUserId'] . '<br>User Name: ' . $_SESSION['selectedUserFname'] . ' ' . $_SESSION['selectedUserLname']; ?>
+        <?php echo '<br><br><p>User Id: ' . $_SESSION['selectedUserId'] . '</p><p>User Name: ' . $_SESSION['selectedUserFname'] . ' ' . $_SESSION['selectedUserLname'] . '</p>'; ?>
 
+        <article>
 <form method="post" action="/kosapacha/employee/index.php">   
-    <h3>Select Existing Timesheet</h3>     
+    <h3>Select Existing Timesheet</h3>   
         <label>Week of:</label>
-            <select type="date" name="weekOf" id="weekOf">
+            <select required type="date" name="weekOf" id="weekOf">
                 <?php if(isset($dropdownOptions) && $dropdownOptions != "") {echo $dropdownOptions; } ?>
             </select>
-            <button type="submit">Select Week</button>
+            <button class="return" type="submit">Select Week</button><br>
             <input type="hidden" name="id" value="<?php echo $id;?>">
             <input type="hidden" name="action" value="timesheet-page">
 </form>
+        </article>
+        <article>
 <form method="post" action="/kosapacha/employee/index.php">   
-    <h3>Update Existing Timesheet</h3>     
+ 
+    <h3>Update Existing Timesheet</h3>   
         <table>
+        <?php echo $weekOf; ?>
+
             <tr>
                 <?php echo $tableHead ?>
             </tr>
@@ -54,19 +91,24 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === FALSE) {
                 <td><input type="number" min="0" value="<?php if(isset($sunHours))  {echo $sunHours;  } ?>" name="sun" id="sun" min="0" max="24" step="0.25"></td>
             </tr>
         </table>
-        <button type="submit">Save Time</button>
+        <button type="submit" class="return">Save Time</button>
+        <input type="hidden" name="week-of" value="<?php echo $weekOf; ?>">
         <input type="hidden" name="action" value="save-time">
 </form>
-<form method="post" action="/kosapacha/employee/index.php">        
+    </article>
+    <article>
+<form method="post" action="/kosapacha/employee/index.php">    
+     
         <h3>Create New Timesheet</h3>
         <p>Please select the first day of the work week.</p>
         <label>Week of:</label>
-            <input type="date" required name="calendarPicker">
+            <input required type="date" required name="calendarPicker">
             <input type="hidden" name="id" value="<?php echo $id;?>">
-
-            <button type="submit">Create</button>
+            
+            <button type="submit" class="return">Create</button>
             <input type="hidden" name="action" value="new-timesheet">
 </form>
+    </article>
     </main>
 
 

@@ -1,26 +1,35 @@
-<!DOCTYPE html>
+<?php
+//redirect if not logged in
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE) {
+    header('Location: /kosapacha/employee');
+}
+?><!DOCTYPE html>
 <html lang="<?php echo $_SESSION['lang']; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!--AWS href="/css/small.css"-->
-    <!--Localhost: href="/kosapacha/css/small.css" -->
-    <link rel="stylesheet" href="/css/small.css">
-    <link rel="stylesheet" href="/css/large.css">
-    <link rel="stylesheet" href="/css/login.css">
-
-    <title> <?php echo $_SESSION['title']; ?></title>
+    <link rel="stylesheet" href="/kosapacha/css/styles.css">
+    <link rel="stylesheet" href="/kosapacha/css/small.css">
+    <script src="/kosapacha/script.js"></script>
+    <title> <?php echo $_SESSION['title'] ?></title>
 </head>
 <body>
 
     <header>
+
         <?php require '../snippets/header.php'; ?>
+ 
     </header>
-
-
     <main>
-        <div class="main-content">
+    <?php if (isset($_SESSION['message'])) {echo $_SESSION['message'];} ?> 
+
+        <picture>
+            <source srcset="" media="(min-width: 700px)"/>
+            <img id="banner-img" src="" alt="">
+        </picture>
+
+        <div class="login-page">
         <hr>
 
             <h1>KOSAPACHA GROUP LOGIN</h1>
@@ -38,20 +47,10 @@
                 <input type="hidden" name="action" value="Login">
             </form>
         </div>
-
     </main>
-
-
     <footer>
-    <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/footer-es.php';}
+        <?php if ($_SESSION['lang'] == 'es') {require '../snippets/es/footer-es.php';}
             else {require '../snippets/footer.php';} ?>
-        </div>
     </footer>
-
-
-
-
-<script src="script.js"></script>
-
 </body>
 </html>

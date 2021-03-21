@@ -1,12 +1,16 @@
-<!DOCTYPE html>
+<?php
+//redirect if not logged in
+if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
+    header('Location: /kosapacha/');
+}
+?><!DOCTYPE html>
 <html lang="<?php echo $_SESSION['lang']; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/small.css">
-    <link rel="stylesheet" href="/css/large.css">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/kosapacha/css/small.css">
+    <link rel="stylesheet" href="/kosapacha/css/large.css">
 
     <title> <?php echo $_SESSION['title']; ?></title>
 </head>
@@ -14,6 +18,8 @@
 
     <header>
         <?php require '../snippets/header.php'; ?>
+        <a href="/kosapacha/employee/index.php?action=admin">Return to Admin Portal</a>
+
     </header>
 
     <main>

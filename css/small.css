@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@100;200;300;400;600;700&display=swap');
-
 body {
     background-color: #191919;
     margin: 0;
@@ -11,61 +9,20 @@ a {
     text-decoration: none;
     color: white;
 }
-.material-icons {
-    color: white;
-    padding: 15px 10px 10px 10px;
-}
-header {
-    padding-top: 12px;
-    position: fixed;
-    width: 100%;
-    margin-bottom: 50px;
-    background-image: linear-gradient(to right, #191919 , black);
-}
-#header-row-2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-footer {
-    text-align: center;
-    margin: 35px;
-}
-footer p {
-    font-size: 2rem;
-    padding: 0;
-    margin: 0 0 5px 0;
-}
-.foot-row-2 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-footer hr {
-    margin-bottom: 25px;
-}
-
 header p, footer p {
     font-family: 'Overpass', sans-serif;
     font-weight: 100;
 }
-header p {
-    font-size: 1.2rem;
-
-}
 h1 {
     font-family: 'Overpass', sans-serif;
     font-weight: 600;
-    font-size: 1.2rem;
-    margin: 0;
-    padding: 0;
+    font-size: 2rem;
+    margin: 10px;
+    padding: 10px;
 }
 .main-content {
-    margin: 25px;
-    font-weight: 100;
+    margin: 0px 25px 25px 25px;
+    font-weight: 100; 
     font-size: .9rem;
     text-justify: justify;
 }
@@ -95,57 +52,98 @@ main img {
     1px 1px 0 #000;
   }
 .card1 {
-    background-image: url("https://loremflickr.com/300/100/medicine");
+    background-image: url("/kosapacha/images/ben-o-bro-wpU4veNGnHg-unsplash.jpg");
 
 }
 .card2 {
-    background-image: url("https://loremflickr.com/300/100/purses");
-
+    background-image: url("/kosapacha/images/sam-andreatta-30Dm5nnL9Zk-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: 500px;
 }
 .card3 {
-    background-image: url("https://loremflickr.com/300/100/timber");
-
+    background-image: url("/kosapacha/images/larm-rmah-AEaTUnvneik-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: 500px;
 }
+/*---------Contact Us-----------*/
 
-.sidebar {
-    position: fixed;
-    width: 200px;
-    height: 100%;
-    top: 70px;
-    background-image: linear-gradient(to right, #191919 , black);
-
-    background-color: #191919;
-
-}
-.sidebar ul li {
-    list-style: none;
-    padding: 10px;
-    font-size: 1.2rem;
-    border-bottom: 1px solid white;
-
-}
-.sidebar ul {
-    list-style-type: none;
-}
-.hide {
-    display: none;
-}
-
-
-/*-----------SWITCH-----------*/
-#header-row-1  {
+.contact {
     display: flex;
-    flex-direction: row;
-    margin-left: 66%;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
 }
-#header-row-1 input[type=submit] {
-    display: inline;
-    background-color: gray;
+.contact input {
+    width: 300px;
+}
+.contact textarea {
+    width: 300px;
+    height: 200px;
+}
+.contact input[type="submit"] {
+    width: 100px;
+    background-color: #191919;
+    color: white;
+    border: solid 3px white;
+    padding: 10px 9px 9px 9px;
+    font-family: 'Overpass', sans-serif;
+    font-size: 1rem;
+    margin-top: 10px;
     border-radius: 5px;
-    border: solid 2px white;
-    height: 30px;
-    margin: 0;
 }
-#header-row-1 input[type=submit]:hover {
-    background-color: red;
+.contact input[type="submit"]:hover {
+    background-color: white;
+    color: #191919;
+}
+.message {
+    padding-left: 20px;
+}
+.products {
+    padding-top: 70px;
+    margin: 10px;
+}
+.products h1 {
+    font-size: 2rem;
+}
+.display-products {
+    margin: 0 auto;
+    padding: 5px 20px;
+    list-style-type: none;
+    
+}
+
+.display-products li a {
+    border-top: 1px solid gray;
+    list-style-type: none;
+    padding: 0 0 0 5px;
+    font-size: 1.3rem;
+    display: flex;
+    max-width: 700px;
+    margin: 10px auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.display-products li a:hover {
+    border: 1px solid gray;
+    box-shadow: -5px 5px 1px gray;
+    transform: scale(1.1);
+    margin: 10px auto;
+}
+.display-products img {
+    padding: 10px;
+    width: 200px;
+}
+
+/*--------PRODUCT DETAILS--------*/
+.product-details {
+    padding: 100px 10px 10px 10px;
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+/*-------------Login Page-------------*/
+
+.login-page {
+    padding: 100px 10px 10px 10px;
 }

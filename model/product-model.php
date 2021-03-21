@@ -14,8 +14,11 @@ function getAllProducts() {
 function populateProducts($array) {
     $table = "";
     foreach ($array as $row) {
-        $table .= '<tr"><td><a href="/products/index.php/?action=selectProduct&product=' . $row['product_id'] . '">' . $row['product_name'] . '</a></td>'
-                . '<td><img src="' . $row['product_image'] . '" alt="Product Image"></td></tr>';
+        $table .= '<li>
+                            <a href="/kosapacha/products/index.php/?action=selectProduct&product=' . $row['product_id'] . '">' . $row['product_name'] . '
+                        <img src="/kosapacha' . $row['product_image'] . '" alt="Product Image"></a>
+
+                    </li>';
     }
         return $table;
  }

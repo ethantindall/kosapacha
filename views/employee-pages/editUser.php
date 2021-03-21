@@ -1,21 +1,38 @@
-<!DOCTYPE html>
-<html lang="en-US">
+<?php
+//redirect if not logged in
+if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
+    header('Location: /kosapacha/');
+}
+?><!DOCTYPE html>
+<html lang="<?php echo $_SESSION['lang']; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/small.css">
-    <link rel="stylesheet" href="/css/large.css">
-
-    <title> <?php echo $_SESSION['title']; ?></title>
+    <link rel="stylesheet" href="/kosapacha/css/styles.css">
+    <link rel="stylesheet" href="/kosapacha/css/small.css">
+    <script src="/kosapacha/script.js"></script>
+    <title> <?php echo $_SESSION['title'] ?></title>
+    <style>
+        main {
+            padding: 60px;
+        }
+        a {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <?php require '../snippets/header.php'; ?>
-    </header>
 
+    <header>
+
+        <?php require '../snippets/header.php'; ?>
+ 
+    </header>
     <main>
         <h1>Edit User</h1>
+        <a href="/kosapacha/employee/index.php?action=admin">Return to Admin Portal</a>
+
         <?php if (isset($_SESSION['message'])) {echo '<p>' .$_SESSION['message'] . '</p>';} ?> 
 
 

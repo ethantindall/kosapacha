@@ -31,7 +31,7 @@ if (isset($_COOKIE['preferred-language'])) {
 switch ($action){
     case 'timesheet-page':
         $_SESSION['title'] ="Kosapacha Timesheet";
-        $weekOf = filter_input(INPUT_GET, 'weekOf', FILTER_SANITIZE_STRING);
+        $weekOf = filter_input(INPUT_POST, 'weekOf', FILTER_SANITIZE_STRING);
         $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
         $dailyhours = 0;
 
@@ -118,7 +118,7 @@ switch ($action){
         header('Location: /kosapacha/employee/index.php/?action=admin');
         break;
     case 'save-time':
-        $weekOf = filter_input(INPUT_POST, 'week-of', FILTER_SANITIZE_STRING);
+        $weekOf = filter_input(INPUT_POST, 'week-of', FILTER_SANITIZE_URL);
         $mon = filter_input(INPUT_POST, 'mon', FILTER_SANITIZE_NUMBER_FLOAT);
         $tues = filter_input(INPUT_POST, 'tues', FILTER_SANITIZE_NUMBER_FLOAT);
         $wed = filter_input(INPUT_POST, 'wed', FILTER_SANITIZE_NUMBER_FLOAT);
@@ -238,6 +238,10 @@ switch ($action){
         }
         $_SESSION['message'] = 'Account created.';
         header('Location: /kosapacha/employee/index.php/?action=admin&message=Account%20Added');
+        break;
+    case 'returnHome':
+        $_SESSION['title'] = 'Kosapacha Employee Landing Page';
+        include '../views/employee-pages/employee.php';
         break;
     default:
         include '../views/employee-pages/employee.php';

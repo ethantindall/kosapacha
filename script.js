@@ -1,4 +1,4 @@
-function showhide() {
-    var element = document.getElementsByClassName("sidebar")[0];
-    element.classList.toggle("hide");
+function openMenu() {
+    var element = document.getElementsByClassName("menu")[0];
+    element.classList.toggle("reveal");
 }

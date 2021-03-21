@@ -1,28 +1,34 @@
 <?php
 //redirect if not logged in
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === FALSE) {
-    header('Location: /');
+if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
+    header('Location: /kosapacha/');
 }
 ?><!DOCTYPE html>
-<html lang="en-US">
+<html lang="<?php echo $_SESSION['lang']; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/small.css">
-    <link rel="stylesheet" href="/css/large.css">
+    <link rel="stylesheet" href="/kosapacha/css/styles.css">
+    <link rel="stylesheet" href="/kosapacha/css/small.css">
+    <link rel="stylesheet" href="/kosapacha/css/employee.css">
 
-    <title> <?php echo $_SESSION['title']; ?></title>
+    <script src="/kosapacha/script.js"></script>
+
+    <title> <?php echo $_SESSION['title'] ?></title>
 </head>
 <body>
 
     <header>
-    <span class="material-icons" onclick="showhide()">menu</span>
-        <p>KOSA<b>PACHA</b></p>
 
-
+        <?php require '../snippets/header.php'; ?>
+ 
+    </header>
     <main>
+        <div class="employee">
+        <div class="col1">
         <h1>Kosapacha Employee Page</h1>
+
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE) {
             echo '<p>Welcome, ' . $_SESSION['userData']['employee_fname'] . '. You are signed in.</p>';
         }
@@ -35,27 +41,38 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === FALSE) {
             <li>Current Weekly Hours: 0</li> 
             <li>Employee Access Level <?php echo $_SESSION['userData']['employee_access'] ?></li>
         </ul>
+        <div class="buttons">
+                <ul>
+                    <?php if($_SESSION['userData']['employee_access'] >= 3) {
+                        echo '<li><a href="/kosapacha/employee/index.php/?action=admin">Administration</a><li>';
+                        }
+                    ?>
+                    <li>
+                        <form action="/kosapacha/employee/" method="post">
+                        <button type="submit">Timesheet</button>
+                        <input type="hidden" name="id" value=<?php echo $_SESSION['userData']['employee_id']; ?>>
+                        <input type="hidden" name="action" value="timesheet-page">
+                        </form>
+                    <li>
+                    <li><a href="/kosapacha/accounts/index.php/?action=sign-out">Sign Out</a></li>
+                </ul>
+          </div>
 
-
+    </div>
+        <div class="col2">
         <form action="/kosapacha/employee/" method="post">
-
+                <h2>Change Password:</h2>
                 <label>Password</label><br>
                 <input required type="password" name="password"><br>
                 <label>Reenter Password</label><br>
                 <input required type="password" name="password2"><br>    
                 
-                <button type="submit">Change Password</button>
+                <input type="submit" value="Change Password">
                 <input type="hidden" name="action" value="update-password">
             </form>
 
-        <ul>
-            <?php if($_SESSION['userData']['employee_access'] >= 3) {
-                echo '<a href="/kosapacha/employee/index.php/?action=admin">Administration</a><br>';
-                }
-            ?>
-            <a href="/kosapacha/employee/index.php/?action=timesheet-page">Timesheet</a><br>
-            <a href="/kosapacha/accounts/index.php/?action=sign-out">Sign Out</a>
-        </ul>
+    </div>
+        </div>
     </main>
 
 

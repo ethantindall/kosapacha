@@ -77,6 +77,7 @@ switch ($action){
         //destroy session
         $_SESSION = array();
         session_destroy();
+        $_SESSION['loggedin'] = FALSE;
         header('Location: /kosapacha/');
         exit;   
     default:

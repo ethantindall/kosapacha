@@ -1,0 +1,21 @@
+
+footer {
+    text-align: center;
+    margin: 35px;
+}
+footer p {
+    font-size: 2rem;
+    padding: 0;
+    margin: 0 0 5px 0;
+}
+.foot-row-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+footer hr {
+    margin-bottom: 25px;
+} 

@@ -54,11 +54,18 @@ if ($_SESSION['lang'] == 'es') {
             include 'views/contact.php';
             break;
         case 'swap-language':
-            $oldLang = filter_input(INPUT_POST, 'language', FILTER_SANITIZE_STRING);
-            $_SESSION['message'] = 'Old Language: '. $oldLang;
+            $oldLang = filter_input(INPUT_GET, 'language', FILTER_SANITIZE_STRING);
             if ($oldLang == 'es') {$_SESSION['lang'] = 'en';} else {$_SESSION['lang'] = 'es';}
             setcookie('preferred-language', $_SESSION['lang'], time() + (86400 * 90));
-            include 'views/home.php';
+            header('Location: /kosapacha/');
+            break;
+        case 'send-message':
+            $_SESSION['message'] = 'Message Sent!';
+            include 'views/contact.php';
+            break;
+        case 'about':
+            $_SESSION['title'] = 'Sobre Kosapacha Group';
+            include 'views/about.php';
             break;
         default:
             $_SESSION['title'] = 'Kosapacha Groupo Inicio';
@@ -88,12 +95,30 @@ else {
             $_SESSION['title'] = 'Kosapacha Contact Us';
             include 'views/contact.php';
             break;
+        case 'send-message':
+            $contactName = filter_input(INPUT_POST, 'contactName', FILTER_SANITIZE_STRING);
+            $contactEmail = filter_input(INPUT_POST, 'contactEmail', FILTER_SANITIZE_STRING);
+            $contactMessage = filter_input(INPUT_POST, 'contactMessage', FILTER_SANITIZE_STRING);
+            
+            $mailTo = 'elitethan@gmail.com';
+            $subject = 'New Kosapacha Message From '. $contactName;
+            $message = $contactMessage . '\n \n Reply to this message at: ' . $contactEmail;
+            $headers = "From: " . $contactEmail;
+            mail($mailTo, $subject, $message, $headers);
+            
+            $_SESSION['message'] = $returnMessage;
+            include 'views/contact.php';
+            break;
         case 'swap-language':
-            $oldLang = filter_input(INPUT_POST, 'language', FILTER_SANITIZE_STRING);
-            $_SESSION['message'] = 'Old Language: '. $oldLang;
+            $oldLang = filter_input(INPUT_GET, 'language', FILTER_SANITIZE_STRING);
             if ($oldLang == 'es') {$_SESSION['lang'] = 'en';} else {$_SESSION['lang'] = 'es';}
             setcookie('preferred-language', $_SESSION['lang'], time() + (86400 * 90));
-            include 'views/home.php';
+            header('Location: /kosapacha/');
+
+            break;
+        case 'about':
+            $_SESSION['title'] = 'Kosapacha Group About';
+            include 'views/about.php';
             break;
         default:
             $_SESSION['title'] = 'Kosapacha Group Home';
