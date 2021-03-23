@@ -115,8 +115,9 @@ switch ($action){
         $date = filter_input(INPUT_POST, 'calendarPicker', FILTER_SANITIZE_STRING);
 
         createNewTimesheet($date, $_SESSION['selectedUserId']);
-        header('Location: /kosapacha/employee/index.php/?action=admin');
-        break;
+        $_SESSION['title'] = 'Kosapacha Employee Landing Page';
+        include '../views/employee-pages/employee.php';
+        break;        break;
     case 'save-time':
         $weekOf = filter_input(INPUT_POST, 'week-of', FILTER_SANITIZE_URL);
         $mon = filter_input(INPUT_POST, 'mon', FILTER_SANITIZE_NUMBER_FLOAT);
@@ -178,11 +179,11 @@ switch ($action){
         if ($password != '' && checkPassword($password)) {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             updatePassword($id, $hashedPassword);
-            header('Location: /kosapacha/employee/index.php/?action=admin&message=Update%20Successful');
+            header('Location: /employee/index.php/?action=admin&message=Update%20Successful');
             exit;
         }
         else if ($password == "") {
-            header('Location: /kosapacha/employee/index.php/?action=admin&message=Update%20Successful');
+            header('Location: /employee/index.php/?action=admin&message=Update%20Successful');
             exit;     
         }
         else {
@@ -237,7 +238,7 @@ switch ($action){
             exit;
         }
         $_SESSION['message'] = 'Account created.';
-        header('Location: /kosapacha/employee/index.php/?action=admin&message=Account%20Added');
+        header('Location: /employee/index.php/?action=admin&message=Account%20Added');
         break;
     case 'returnHome':
         $_SESSION['title'] = 'Kosapacha Employee Landing Page';

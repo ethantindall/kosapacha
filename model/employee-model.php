@@ -2,12 +2,20 @@
 
 function saveTime($id, $date, $mon, $tues, $wed, $thurs, $fri, $sat, $sun) {
     $db = kosapachaConnect();
-    $sql = "INSERT INTO timesheets (timesheet_employee, timesheet_week, mon_time, tues_time, wed_time, thurs_time, fri_time, sat_time, sun_time)
-    VALUES
-     (:id, :date, :mon, :tues, :wed, :thurs, :fri, :sat, :sun)";
+    $sql = "UPDATE timesheets SET 
+            timesheet_employee = :id,
+            timesheet_week = :dateOf,
+            mon_time = :mon,
+            tues_time = :tues,
+            wed_time = :wed,
+            thurs_time = :thurs,
+            fri_time = :fri,
+            sat_time = :sat,
+            sun_time = :sun
+            WHERE timesheet_week = :dateOf AND timesheet_employee = :id";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $stmt->bindValue(':date', $date, PDO::PARAM_STR);
+    $stmt->bindValue(':dateOf', $date, PDO::PARAM_STR);
     $stmt->bindValue(':mon', $mon);
     $stmt->bindValue(':tues', $tues);
     $stmt->bindValue(':wed', $wed);
@@ -103,8 +111,8 @@ function usersTable(){
                           <td>'. $user['employee_fname'] . ' ' . $user['employee_lname'].'</td>  
                           <td>'. $user['employee_access'] .'</td>  
                           <td>'. $user['employee_status'] .'</td>  
-                          <td><a href="/kosapacha/employee/index.php/?action=editUserPage&user='. $user['employee_id'] .'">Edit</a></td>
-                          <td><form action="/kosapacha/employee/" method="post">
+                          <td><a href="/employee/index.php/?action=editUserPage&user='. $user['employee_id'] .'">Edit</a></td>
+                          <td><form action="/employee/" method="post">
                                 <button type="submit">Timesheet</button>
                                 <input type="hidden" name="id" value="'. $user['employee_id'] .'">
                                 <input type="hidden" name="action" value="timesheet-page">

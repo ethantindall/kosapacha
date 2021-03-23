@@ -30,9 +30,8 @@ if (isset($_COOKIE['preferred-language'])) {
 if (!isset($_SESSION['productList'])) {
     $_SESSION['productList'] = getAllProducts();
 }
-if (!isset($_SESSION['productTable'])) {
-    $_SESSION['productTable'] = populateProducts($_SESSION['productList']);
-}
+$_SESSION['productTable'] = populateProducts($_SESSION['productList']);
+
 /*----------SWITCH STATEMENT-------------*/
 
 if ($_SESSION['lang'] == 'es') {

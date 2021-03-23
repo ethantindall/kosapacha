@@ -1,7 +1,10 @@
 <?php
 //redirect if not logged in
 if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
-    header('Location: /kosapacha/');
+    header('Location: /');
+}
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE && $_SESSION['userData']['employee_access'] < 3) {
+    header('Location: /');  
 }
 ?><!DOCTYPE html>
 <html lang="<?php echo $_SESSION['lang']; ?>">
@@ -9,8 +12,8 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/kosapacha/css/small.css">
-    <link rel="stylesheet" href="/kosapacha/css/large.css">
+    <link rel="stylesheet" href="/css/small.css">
+    <link rel="stylesheet" href="/css/large.css">
 
     <title> <?php echo $_SESSION['title']; ?></title>
 </head>
@@ -18,7 +21,7 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
 
     <header>
         <?php require '../snippets/header.php'; ?>
-        <a href="/kosapacha/employee/index.php?action=admin">Return to Admin Portal</a>
+        <a href="/employee/index.php?action=admin">Return to Admin Portal</a>
 
     </header>
 
@@ -30,9 +33,9 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
             <?php if (isset($_SESSION['message'])) {echo '<p>' . $_SESSION['message'] . '</p>';} ?> 
 
             <!--AWS: <form action="/accounts/" method="post"> -->
-            <!--Localhost: <form action="/kosapacha/accounts/" method="post"> -->
+            <!--Localhost: <form action="/accounts/" method="post"> -->
 
-            <form action="/kosapacha/employee/" method="post">
+            <form action="/employee/" method="post">
                 <label>First Name*</label><br>
                 <input required type="text" name="fname" <?php if(isset($fname)){echo "value='$fname'";}  ?> ><br>
                 <label>Middle Name</label><br>

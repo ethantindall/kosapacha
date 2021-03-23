@@ -25,6 +25,7 @@ h1 {
     font-weight: 100; 
     font-size: .9rem;
     text-justify: justify;
+    
 }
 
 .main-content p {
@@ -52,16 +53,16 @@ main img {
     1px 1px 0 #000;
   }
 .card1 {
-    background-image: url("/kosapacha/images/ben-o-bro-wpU4veNGnHg-unsplash.jpg");
+    background-image: url("/images/ben-o-bro-wpU4veNGnHg-unsplash.jpg");
 
 }
 .card2 {
-    background-image: url("/kosapacha/images/sam-andreatta-30Dm5nnL9Zk-unsplash.jpg");
+    background-image: url("/images/sam-andreatta-30Dm5nnL9Zk-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: 500px;
 }
 .card3 {
-    background-image: url("/kosapacha/images/larm-rmah-AEaTUnvneik-unsplash.jpg");
+    background-image: url("/images/larm-rmah-AEaTUnvneik-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: 500px;
 }
@@ -147,3 +148,4 @@ main img {
 .login-page {
     padding: 100px 10px 10px 10px;
 }
+

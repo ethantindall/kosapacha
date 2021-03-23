@@ -78,7 +78,7 @@ switch ($action){
         $_SESSION = array();
         session_destroy();
         $_SESSION['loggedin'] = FALSE;
-        header('Location: /kosapacha/');
+        header('Location: /');
         exit;   
     default:
         $_SESSION['title'] = 'Kosapacha Login Page';

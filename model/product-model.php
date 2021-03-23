@@ -13,12 +13,22 @@ function getAllProducts() {
 
 function populateProducts($array) {
     $table = "";
-    foreach ($array as $row) {
-        $table .= '<li>
-                            <a href="/kosapacha/products/index.php/?action=selectProduct&product=' . $row['product_id'] . '">' . $row['product_name'] . '
-                        <img src="/kosapacha' . $row['product_image'] . '" alt="Product Image"></a>
+    if ($_SESSION['lang'] == 'es') {
+        foreach ($array as $row) {
+            $table .= '<li>
+                                <a href="/products/index.php/?action=selectProduct&product=' . $row['product_id'] . '">' . $row['product_name_es'] . '
+                            <img src="/kosapacha' . $row['product_image'] . '" alt="Imagen del producto"></a>
 
-                    </li>';
+                        </li>';
+        }
+    } else {
+        foreach ($array as $row) {
+            $table .= '<li>
+                                <a href="/products/index.php/?action=selectProduct&product=' . $row['product_id'] . '">' . $row['product_name'] . '
+                            <img src="/kosapacha' . $row['product_image'] . '" alt="Product Image"></a>
+
+                        </li>';
+        }   
     }
         return $table;
  }

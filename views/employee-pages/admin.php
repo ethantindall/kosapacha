@@ -1,7 +1,10 @@
 <?php
 //redirect if not logged in
 if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
-    header('Location: /kosapacha/');
+    header('Location: /');
+}
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE && $_SESSION['userData']['employee_access'] < 3) {
+    header('Location: /');  
 }
 ?><!DOCTYPE html>
 <html lang="<?php echo $_SESSION['lang']; ?>">
@@ -9,9 +12,9 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/kosapacha/css/styles.css">
-    <link rel="stylesheet" href="/kosapacha/css/small.css">
-    <script src="/kosapacha/script.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/small.css">
+    <script src="/script.js"></script>
     <title> <?php echo $_SESSION['title'] ?></title>
     <style>
         main {
@@ -54,8 +57,8 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
     <main>
         <h1>Kosapacha Employees</h1>
     <?php if (isset($_SESSION['message'])) {echo '<p>' .$_SESSION['message'] . '</p>';} ?> 
-    <a href="/kosapacha/employee/index.php/?action=registration-page">Register New User</a><br>
-    <a href="/kosapacha/employee/index.php?action=returnHome">Return to Employee Home</a><br>
+    <a href="/employee/index.php/?action=registration-page">Register New User</a><br>
+    <a href="/employee/index.php?action=returnHome">Return to Employee Home</a><br>
 
 
     <table>

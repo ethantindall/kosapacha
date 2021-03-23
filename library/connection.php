@@ -6,7 +6,7 @@ function kosapachaConnect() {
     $servername = 'kosapacha-database-1.cz4vwbbidkxm.us-east-2.rds.amazonaws.com:3306';
     $dbname = 'kosapacha_group_db';
     $username = 'admin';
-    $password = 'password';
+    $password = 'Ho1aKo$apacha';
     $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
 
     try {

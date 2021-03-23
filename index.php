@@ -1,8 +1,10 @@
 <?php
 
+//import functions
 require 'library/connection.php';
 require 'library/functions.php';
 
+//AWS template code
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
   $file = 'tmp/sample-app.log';
@@ -16,9 +18,11 @@ $_SESSION['message'] = "";
 
 /*---------LANGUAGE CONTROL------------*/
 
+//if cookie exists, get data
 if (isset($_COOKIE['preferred-language'])) {
     $_SESSION['lang'] = $_COOKIE['preferred-language'];
 } else {
+    //else, get lang from browser settings
     $_SESSION['lang'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     setcookie('preferred-language', $_SESSION['lang'], time() + (86400 * 90));
 }
@@ -57,7 +61,7 @@ if ($_SESSION['lang'] == 'es') {
             $oldLang = filter_input(INPUT_GET, 'language', FILTER_SANITIZE_STRING);
             if ($oldLang == 'es') {$_SESSION['lang'] = 'en';} else {$_SESSION['lang'] = 'es';}
             setcookie('preferred-language', $_SESSION['lang'], time() + (86400 * 90));
-            header('Location: /kosapacha/');
+            header('Location: /');
             break;
         case 'send-message':
             $_SESSION['message'] = 'Message Sent!';
@@ -113,7 +117,7 @@ else {
             $oldLang = filter_input(INPUT_GET, 'language', FILTER_SANITIZE_STRING);
             if ($oldLang == 'es') {$_SESSION['lang'] = 'en';} else {$_SESSION['lang'] = 'es';}
             setcookie('preferred-language', $_SESSION['lang'], time() + (86400 * 90));
-            header('Location: /kosapacha/');
+            header('Location: /');
 
             break;
         case 'about':

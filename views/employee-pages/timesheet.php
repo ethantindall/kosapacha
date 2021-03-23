@@ -1,7 +1,7 @@
 <?php
 //redirect if not logged in
 if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
-    header('Location: /kosapacha/');
+    header('Location: /');
 }
 ?><!DOCTYPE html>
 <html lang="<?php echo $_SESSION['lang']; ?>">
@@ -9,14 +9,15 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/kosapacha/css/styles.css">
-    <link rel="stylesheet" href="/kosapacha/css/small.css">
-    <script src="/kosapacha/script.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/small.css">
+    <script src="/script.js"></script>
     <title> <?php echo $_SESSION['title'] ?></title>
     <style>
         main {
             padding: 70px 20px 20px 20px;
-            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
         }
         .return {
             padding: 10px;
@@ -29,7 +30,7 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
             font-size: 1rem;
         }
         article {
-            border: solid 3px white;
+            border: solid 1px white;
             padding: 10px;
             margin: 20px;
             border-radius: 10px;
@@ -55,12 +56,12 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
     <main>
         <h1>Kosapacha Timesheet Page</h1>
         <?php if (isset($_SESSION['message'])) {echo '<p>' .$_SESSION['message'] . '</p>';} ?> 
-        <a class="return" href="/kosapacha/employee/index.php?action=employee">Return to Employee Portal</a>
+        <a class="return" href="/employee/index.php?action=employee">Return to Employee Portal</a>
 
         <?php echo '<br><br><p>User Id: ' . $_SESSION['selectedUserId'] . '</p><p>User Name: ' . $_SESSION['selectedUserFname'] . ' ' . $_SESSION['selectedUserLname'] . '</p>'; ?>
 
         <article>
-<form method="post" action="/kosapacha/employee/index.php">   
+<form method="post" action="/employee/index.php">   
     <h3>Select Existing Timesheet</h3>   
         <label>Week of:</label>
             <select required type="date" name="weekOf" id="weekOf">
@@ -72,7 +73,7 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
 </form>
         </article>
         <article>
-<form method="post" action="/kosapacha/employee/index.php">   
+<form method="post" action="/employee/index.php">   
  
     <h3>Update Existing Timesheet</h3>   
         <table>
@@ -97,7 +98,7 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
 </form>
     </article>
     <article>
-<form method="post" action="/kosapacha/employee/index.php">    
+<form method="post" action="/employee/index.php">    
      
         <h3>Create New Timesheet</h3>
         <p>Please select the first day of the work week.</p>

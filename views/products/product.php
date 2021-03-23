@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/kosapacha/css/styles.css">
-    <link rel="stylesheet" href="/kosapacha/css/small.css">
-    <script src="/kosapacha/script.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/small.css">
+    <script src="/script.js"></script>
     <title> <?php echo $_SESSION['title'] ?></title>
 </head>
 <body>
@@ -22,10 +22,14 @@
     <main>
         <div class="product-details">
         <img src="/kosapacha<?php echo $selectedProduct['product_image']; ?>" alt="Product Image">
-        <h1><?php echo $selectedProduct['product_name']; ?></h1>
+        <h1><?php if ($_SESSION['lang'] == 'es') {
+            echo $selectedProduct['product_name_es'];}
+            else {echo $selectedProduct['product_name'];} ?></h1>
 
         <h3>$<?php echo $selectedProduct['product_price']; ?></h3>
-        <p><?php echo $selectedProduct['product_description']; ?></p>
+        <p><?php if ($_SESSION['lang'] == 'es') {
+            echo $selectedProduct['product_description_es'];}
+            else {echo $selectedProduct['product_description'];} ?></p>
         <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
             <input type="hidden" name="cmd" value="_s-xclick">
             <input type="hidden" name="hosted_button_id" value="<?php echo $selectedProduct['product_button']; ?>">

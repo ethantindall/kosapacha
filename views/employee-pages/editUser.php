@@ -1,7 +1,10 @@
 <?php
 //redirect if not logged in
 if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
-    header('Location: /kosapacha/');
+    header('Location: /');
+}
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE && $_SESSION['userData']['employee_access'] < 3) {
+    header('Location: /');  
 }
 ?><!DOCTYPE html>
 <html lang="<?php echo $_SESSION['lang']; ?>">
@@ -9,9 +12,9 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/kosapacha/css/styles.css">
-    <link rel="stylesheet" href="/kosapacha/css/small.css">
-    <script src="/kosapacha/script.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/small.css">
+    <script src="/script.js"></script>
     <title> <?php echo $_SESSION['title'] ?></title>
     <style>
         main {
@@ -31,12 +34,12 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
     </header>
     <main>
         <h1>Edit User</h1>
-        <a href="/kosapacha/employee/index.php?action=admin">Return to Admin Portal</a>
+        <a href="/employee/index.php?action=admin">Return to Admin Portal</a>
 
         <?php if (isset($_SESSION['message'])) {echo '<p>' .$_SESSION['message'] . '</p>';} ?> 
 
 
-        <form action="/kosapacha/employee/" method="post">
+        <form action="/employee/" method="post">
                 <input type="hidden" name="oldUser" value="<?php if(isset($employeeDetails['employee_username'])){echo $employeeDetails['employee_username'];} ?>" >
                 <input type="hidden" name="id" value="<?php if(isset($employeeDetails['employee_id'])){echo $employeeDetails['employee_id'];} ?>" >
 

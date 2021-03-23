@@ -2,8 +2,8 @@
 header {
   padding-top: 12px;
   width: 100%;
-  position: absolute;
-  margin-bottom: 50px;
+  margin-bottom: 0px;
+  margin-top: 0;
   background-image: -webkit-gradient(linear, left top, right top, from(#191919), to(black));
   background-image: linear-gradient(to right, #191919, black);
 }
@@ -44,6 +44,49 @@ header {
 header p {
   margin-top: 10px;
   font-size: 1.2rem;
+}
+
+@media screen and (min-width: 900px) {
+  .menu {
+    text-align: center;
+  }
+  .menu ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    padding: 0;
+  }
+  .menu ul li {
+    border: none;
+    width: 100%;
+  }
+  .menu ul li a {
+    width: 100%;
+  }
+  .menu ul li a:hover {
+    text-decoration: underline;
+  }
+  .menu-icon {
+    padding-left: 10px;
+  }
+  #header-row-1 {
+    margin: 0 0 -40px 0;
+    padding: 0px;
+  }
+  #header-row-1 p {
+    font-size: 2.4rem;
+    margin-top: 0;
+  }
+  header {
+    border-bottom: 2px solid white;
+    padding-bottom: 5px;
+  }
 }
 
 footer {

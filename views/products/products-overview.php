@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/kosapacha/css/styles.css">
-    <link rel="stylesheet" href="/kosapacha/css/small.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/small.css">
     <script src="../script.js"></script>
     <title> <?php echo $_SESSION['title'] ?></title>
 </head>
@@ -22,7 +22,10 @@
             <img id="banner-img" src="" alt="">
         </picture>
         <div class="products">
-            <h1>Our Products</h1>
+        <?php if ($_SESSION['lang'] == 'es') {echo '
+            <h1>Nuestros Productos</h1>';}
+            else {'<h1>Our Products</h1>';} ?>
+
             <ul class="display-products">
                 <?php echo $_SESSION['productTable']; ?>
             </ul>
