@@ -11,7 +11,7 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/small.css">
-    <script src="/script.js"></script>
+    <script src="../script.js"></script>
     <title> <?php echo $_SESSION['title'] ?></title>
     <style>
         main {
@@ -77,7 +77,7 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
  
     <h3>Update Existing Timesheet</h3>   
         <table>
-        <?php echo $weekOf; ?>
+        <?php if (!isset($weekOf)) {echo $dailyHours;} else { echo $weekOf; } ?>
 
             <tr>
                 <?php echo $tableHead ?>
@@ -93,7 +93,7 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
             </tr>
         </table>
         <button type="submit" class="return">Save Time</button>
-        <input type="hidden" name="week-of" value="<?php echo $weekOf; ?>">
+        <input type="hidden" name="week-of" value="<?php if (!isset($weekOf)) {echo $dailyHours;} else { echo $weekOf; } ?>">
         <input type="hidden" name="action" value="save-time">
 </form>
     </article>

@@ -14,7 +14,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === TRUE && $_SESSION[
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/small.css">
-    <script src="/script.js"></script>
+    <script src="../script.js"></script>
     <title> <?php echo $_SESSION['title'] ?></title>
     <style>
         main {

@@ -25,7 +25,7 @@ if (!(isset($_SESSION['loggedin'])) || $_SESSION['loggedin'] === FALSE) {
             margin: 40px auto;
         }
     </style>
-    <script src="/script.js"></script>
+    <script src="../script.js"></script>
 
     <title> <?php echo $_SESSION['title'] ?></title>
 </head>

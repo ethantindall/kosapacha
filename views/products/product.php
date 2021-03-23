@@ -21,7 +21,7 @@
 
     <main>
         <div class="product-details">
-        <img src="/kosapacha<?php echo $selectedProduct['product_image']; ?>" alt="Product Image">
+        <img src="<?php echo $selectedProduct['product_image']; ?>" alt="Product Image">
         <h1><?php if ($_SESSION['lang'] == 'es') {
             echo $selectedProduct['product_name_es'];}
             else {echo $selectedProduct['product_name'];} ?></h1>

@@ -17,7 +17,7 @@ function populateProducts($array) {
         foreach ($array as $row) {
             $table .= '<li>
                                 <a href="/products/index.php/?action=selectProduct&product=' . $row['product_id'] . '">' . $row['product_name_es'] . '
-                            <img src="/kosapacha' . $row['product_image'] . '" alt="Imagen del producto"></a>
+                            <img src="' . $row['product_image'] . '" alt="Imagen del producto"></a>
 
                         </li>';
         }
@@ -25,7 +25,7 @@ function populateProducts($array) {
         foreach ($array as $row) {
             $table .= '<li>
                                 <a href="/products/index.php/?action=selectProduct&product=' . $row['product_id'] . '">' . $row['product_name'] . '
-                            <img src="/kosapacha' . $row['product_image'] . '" alt="Product Image"></a>
+                            <img src="' . $row['product_image'] . '" alt="Product Image"></a>
 
                         </li>';
         }   
