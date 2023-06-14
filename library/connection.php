@@ -3,10 +3,10 @@
 //Connect to Kosapacha Database on AWS
 
 function kosapachaConnect() {
-    $servername = 'kosapacha-database-1.cz4vwbbidkxm.us-east-2.rds.amazonaws.com:3306';
+    $servername = '...place-server-here...';
     $dbname = 'kosapacha_group_db';
     $username = 'admin';
-    $password = 'Ho1aKo$apacha';
+    $password = 'password';
     $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
 
     try {
