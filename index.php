@@ -104,7 +104,7 @@ else {
             $contactEmail = filter_input(INPUT_POST, 'contactEmail', FILTER_SANITIZE_STRING);
             $contactMessage = filter_input(INPUT_POST, 'contactMessage', FILTER_SANITIZE_STRING);
             
-            $mailTo = 'elitethan@gmail.com';
+            $mailTo = 'boss_man_email@gmail.com';
             $subject = 'New Kosapacha Message From '. $contactName;
             $message = $contactMessage . '\n \n Reply to this message at: ' . $contactEmail;
             $headers = "From: " . $contactEmail;
