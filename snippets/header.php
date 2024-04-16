@@ -16,7 +16,6 @@
                  <li><a href="/index.php">Inicio</a></li>
                  <li><a href="/index.php?action=about">Sobre</a></li>
                  <li><a href="/index.php?action=contact">Contacto</a></li>
-                 <li><a href="/products/index.php">Los Productos</a></li>
                  <li><a href="/index.php?action=swap-language&language='. $_SESSION['lang'] . '">La Lengua</a></li>
                  <li><a href="/accounts/index.php/?action=login-page">Empleados</a></li>
              </ul>';}
@@ -24,7 +23,6 @@
             <li><a href="/index.php">Home</a></li>
             <li><a href="/index.php?action=about">About</a></li>
             <li><a href="/index.php?action=contact">Contact</a></li>
-            <li><a href="/products/index.php">Products</a></li>
             <li><a href="/index.php?action=swap-language&language='. $_SESSION['lang'] . '">Language</a></li>
             <li><a href="/accounts/index.php/?action=login-page">Employees</a></li>
         </ul>';}  ?>

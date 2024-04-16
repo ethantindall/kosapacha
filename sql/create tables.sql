@@ -52,18 +52,3 @@ create table credentials (
     FOREIGN KEY (credential_employee) REFERENCES employees(employee_id),
     PRIMARY KEY (credential_id)
 );
-
-CREATE TABLE timesheets (
-	timesheet_id INT NOT NULL AUTO_INCREMENT,
-    timesheet_employee INT NOT NULL,
-    timesheet_week VARCHAR(12),
-    mon_time FLOAT,
-    tues_time FLOAT,
-    wed_time FLOAT,
-    thurs_time FLOAT,
-    fri_time FLOAT,
-    sat_time FLOAT,
-    sun_time FLOAT,
-    PRIMARY KEY (timesheet_id),
-	FOREIGN KEY (timesheet_employee) REFERENCES employees(employee_id)
-);
